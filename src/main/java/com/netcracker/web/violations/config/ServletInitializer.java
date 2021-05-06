@@ -1,6 +1,11 @@
 package com.netcracker.web.violations.config;
 
+
+import org.springframework.web.filter.CharacterEncodingFilter;
 import org.springframework.web.servlet.support.AbstractAnnotationConfigDispatcherServletInitializer;
+
+import javax.servlet.Filter;
+
 
 public class ServletInitializer extends AbstractAnnotationConfigDispatcherServletInitializer {
     @Override
@@ -16,5 +21,12 @@ public class ServletInitializer extends AbstractAnnotationConfigDispatcherServle
     @Override
     protected String[] getServletMappings() {
         return new String[]{"/"};
+    }
+
+    protected Filter[] getServletFilters() {
+        CharacterEncodingFilter characterEncodingFilter = new CharacterEncodingFilter();
+        characterEncodingFilter.setEncoding("UTF-8");
+        characterEncodingFilter.setForceEncoding(true);
+        return new Filter[] {characterEncodingFilter};
     }
 }
