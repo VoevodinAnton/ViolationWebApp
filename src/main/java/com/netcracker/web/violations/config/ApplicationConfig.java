@@ -15,7 +15,7 @@ import org.thymeleaf.spring5.templateresolver.SpringResourceTemplateResolver;
 import org.thymeleaf.spring5.view.ThymeleafViewResolver;
 
 @Configuration
-@ComponentScan("com.netcracker.web.violations.controllers")
+@ComponentScan("com.netcracker.web.violations")
 @EnableWebMvc
 public class ApplicationConfig implements WebMvcConfigurer {
 

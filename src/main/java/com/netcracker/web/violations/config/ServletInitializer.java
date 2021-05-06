@@ -15,7 +15,7 @@ public class ServletInitializer extends AbstractAnnotationConfigDispatcherServle
 
     @Override
     protected Class<?>[] getServletConfigClasses() {
-        return new Class[] {ApplicationConfig.class};
+        return new Class[]{ApplicationConfig.class};
     }
 
     @Override
@@ -27,6 +27,6 @@ public class ServletInitializer extends AbstractAnnotationConfigDispatcherServle
         CharacterEncodingFilter characterEncodingFilter = new CharacterEncodingFilter();
         characterEncodingFilter.setEncoding("UTF-8");
         characterEncodingFilter.setForceEncoding(true);
-        return new Filter[] {characterEncodingFilter};
+        return new Filter[]{characterEncodingFilter};
     }
 }

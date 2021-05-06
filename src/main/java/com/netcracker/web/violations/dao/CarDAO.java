@@ -1,13 +1,18 @@
 package com.netcracker.web.violations.dao;
 
 import com.netcracker.web.violations.model.Car;
+import org.springframework.stereotype.Component;
 
 import java.util.List;
 
 public interface CarDAO {
-    int save(Car car);
-    int update(Car car);
+    void save(Car car);
+
+    void update(int id, Car car);
+
     Car get(int id);
-    int delete(Integer id);
+
+    void delete(int id);
+
     List<Car> allCars();
 }
