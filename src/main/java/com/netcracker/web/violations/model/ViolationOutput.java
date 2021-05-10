@@ -2,13 +2,14 @@ package com.netcracker.web.violations.model;
 
 import java.util.Date;
 
-public class Violation {
+public class ViolationOutput {
     private Integer id;
     private Date date;
     private Integer status;
     private String address;
-    private Integer id_car;
-    private Integer id_fine;
+    private String carNumber;
+    private String fineType;
+    private Integer fineAmount;
 
     public Integer getId() {
         return id;
@@ -42,19 +43,27 @@ public class Violation {
         this.address = address;
     }
 
-    public Integer getId_car() {
-        return id_car;
+    public String getCarNumber() {
+        return carNumber;
     }
 
-    public void setId_car(Integer id_car) {
-        this.id_car = id_car;
+    public void setCarNumber(String carNumber) {
+        this.carNumber = carNumber;
     }
 
-    public Integer getId_fine() {
-        return id_fine;
+    public Integer getFineAmount() {
+        return fineAmount;
     }
 
-    public void setId_fine(Integer id_fine) {
-        this.id_fine = id_fine;
+    public void setFineAmount(Integer fineAmount) {
+        this.fineAmount = fineAmount;
+    }
+
+    public String getFineType() {
+        return fineType;
+    }
+
+    public void setFineType(String fineType) {
+        this.fineType = fineType;
     }
 }
