@@ -12,22 +12,31 @@
     <title>База данных штрафов</title>
 </head>
 <body>
+<style>
+    <%@include file='/res/violations_style.css' %>
+</style>
 <h2>Поиск штрафов</h2>
+<div class="parent">
+    <button type="button" name="find">Найти</button><br>
+    <form action="/cars" target="_blank">
+        <button>Открыть базу данных автомобилей</button>
+    </form>
+</div>
 <table>
     <c:forEach var="violation" items="${violations}">
         <tr>
             <td>
                 <div class ="flex-container-parent">
                     <div class ="flex-container">
-                        <div class="flex-item"> ${violation.type_of_fine} </div>
+                        <div class="flex-item"> ${violation.fineType} </div>
                         <div class="flex-item"> ${violation.status} </div>
-                        <div class="flex-item"> ${violation.number_of_car} </div>
+                        <div class="flex-item"> ${violation.carNumber} </div>
                         <div class="flex-item"> Удалить </div>
                         <div class="flex-item"> Редактировать </div>
                     </div>
-                    <p>500 рублей<br></p>
-                    <p>Самара</p>
-                    <p>21.03.2021</p>
+                    <p>${violation.fineAmount}</p>
+                    <p>${violation.address}</p>
+                    <p>${violation.date}</p>
                 </div>
             </td>
         </tr>

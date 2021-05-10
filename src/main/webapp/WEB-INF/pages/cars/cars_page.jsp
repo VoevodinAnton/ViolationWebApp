@@ -26,7 +26,7 @@
                 <a href="/cars/${car.id}/edit">edit</a>
                 <a href="/cars/${car.id}/delete/">delete</a>
             </div>
-            <p>Владелец<br></p>
+            <p>Владелец</p>
             <p>${car.owner}</p>
             </td>
         </tr>

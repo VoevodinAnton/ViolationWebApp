@@ -1,0 +1,48 @@
+@import url('https://fonts.googleapis.com/css2?family=Open+Sans&display=swap');
+@import url('/res/nullstyle.css');
+body{
+    font-family: 'Open Sans', sans-serif;
+}
+.flex-container{
+    width: 100%;
+    display: flex;
+    margin: 0 -5px;
+}
+.flex-container-parent{
+    display: flex;
+    flex-direction: column;
+}
+.flex-item{
+    display: block;
+    margin: 0 5px;
+    padding-right: 30px;
+    flex-grow: 1;
+}
+table{
+    width: 70%;
+    margin: auto;
+    border-collapse: separate;
+}
+
+
+table tr td{
+    border: 1px solid #000000;
+    border-radius: 15px;
+    padding: 10px;
+    margin: 10px;
+}
+
+.parent{
+    width: 70%;
+    margin: auto;
+}
+
+button{
+    width: 100%;
+    margin: 5px;
+    height: 30px;
+    border-radius: 10px;
+    border: 0px;
+    background-color: #FFDA59;
+    color: white;
+}
