@@ -12,24 +12,22 @@
     <title>Cars</title>
 </head>
 <body>
-
-<h2>Cars</h2>
+<style>
+    <%@include file='/res/cars_style.css' %>
+</style>
+<h2>База данных автомобилей</h2>
 <table>
-    <tr>
-        <th>id</th>
-        <th>number</th>
-        <th>model</th>
-        <th>owner</th>
-    </tr>
     <c:forEach var="car" items="${cars}">
         <tr>
-            <td>${car.id}</td>
-            <td>${car.number}</td>
-            <td>${car.model}</td>
-            <td>${car.owner}</td>
             <td>
+            <div class = "flex-container">
+                <div class = "flex-item">${car.number}</div>
+                <div class = "flex-item">${car.model}</div>
                 <a href="/cars/${car.id}/edit">edit</a>
                 <a href="/cars/${car.id}/delete/">delete</a>
+            </div>
+            <p>Владелец<br></p>
+            <p>${car.owner}</p>
             </td>
         </tr>
     </c:forEach>
