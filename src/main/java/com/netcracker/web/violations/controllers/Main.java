@@ -18,8 +18,16 @@ public class Main {
 
             System.out.println("Connection successful!");
             Statement statement = connection.createStatement();
-            String SQL = "SELECT * FROM Car";
-            ResultSet resultSet = statement.executeQuery(SQL);
+            Car car = new Car();
+            car.setNumber("В123ПЕ163");
+            car.setOwner("Петров Петр Петрович");
+            car.setModel("Toyota Camry");
+            String SQL = "INSERT INTO Car (number, model, owner) VALUES('" + car.getNumber() +
+                    "','" + car.getModel() + "','" + car.getOwner() + "')";
+            //ResultSet resultSet = statement.executeQuery(SQL);
+
+
+            /*
 
             while (resultSet.next()) {
                 Car car = new Car();
@@ -31,13 +39,18 @@ public class Main {
 
                 cars.add(car);
             }
+
+             */
         } catch (SQLException e) {
             System.out.println("Connection failed!");
             e.printStackTrace();
         }
+        /*
         for (Car car: cars){
             System.out.println(car.getModel());
         }
+
+         */
 
     }
 }

@@ -42,12 +42,12 @@ public class CarsController {
     }
 
     //TODO: не уверен в url, место возможной ошибки
-    @PostMapping()
-    public ModelAndView create(@ModelAttribute("car") Car car, BindingResult bindingResult) {
+    @PostMapping("/new")
+    public ModelAndView create(@ModelAttribute("car") Car car) {
         ModelAndView modelAndView = new ModelAndView();
-        if (bindingResult.hasErrors()) {
-            modelAndView.setViewName("cars/new");
-        }
+        //if (bindingResult.hasErrors()) {
+          //  modelAndView.setViewName("cars/new");
+       // }
         carDAO.save(car);
         modelAndView.setViewName("redirect:/cars");
         return modelAndView;
@@ -60,6 +60,26 @@ public class CarsController {
         modelAndView.addObject("car", carDAO.get(id));
         return modelAndView;
     }
+
+    @PostMapping("/{id}/delete")
+    public ModelAndView update(@ModelAttribute("car") Car carUpdated, @PathVariable("id") int id){
+        ModelAndView modelAndView = new ModelAndView();
+        carDAO.update(id, carUpdated);
+        modelAndView.setViewName("redirect:/cars");
+        return modelAndView;
+    }
+
+    //TODO: доделать удаление
+    /*
+    @PostMapping("/{id}/delete")
+    public ModelAndView delete(@PathVariable("id") int id){
+        ModelAndView modelAndView = new ModelAndView();
+        carDAO.delete(id);
+        modelAndView.setViewName("redirect:/cars");
+        return modelAndView;
+    }
+
+     */
 
 
 }

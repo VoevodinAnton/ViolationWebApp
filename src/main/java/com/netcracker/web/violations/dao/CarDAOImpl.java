@@ -38,9 +38,10 @@ public class CarDAOImpl implements CarDAO {
     @Override
     public void save(Car car) {
         try {
+            System.out.println(car.getModel());
             Statement statement = connection.createStatement();
             String SQL = "INSERT INTO Car (number, model, owner) VALUES('" + car.getNumber() +
-                    "'," + car.getModel() + ",'" + car.getOwner() + "')";
+                    "','" + car.getModel() + "','" + car.getOwner() + "')";
 
             statement.executeUpdate(SQL);
         } catch (SQLException e) {
