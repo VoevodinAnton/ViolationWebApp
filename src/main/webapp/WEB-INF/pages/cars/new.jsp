@@ -36,8 +36,7 @@
 </style>
 <h2>Регистрация автомобиля</h2>
 <c:url value="/cars/new" var="addUrl"/>
-<c:url value="/edit" var="editUrl"/>
-<form action="${empty car.number ? addUrl : editUrl}" name="car" method="POST">
+<form action="${addUrl}" name="car" method="POST">
 <div class="flex-content">
     <p class = "item">Номер автомобиля</p>
     <input type="text" name = "number" placeholder="number" value = "${car.number}" class = "item" REQUIRED>
