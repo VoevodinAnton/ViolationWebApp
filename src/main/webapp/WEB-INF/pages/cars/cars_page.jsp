@@ -24,8 +24,8 @@
             <div class = "flex-container">
                 <div class = "flex-item">${car.number}</div>
                 <div class = "flex-item">${car.model}</div>
-                <a href="/cars/${car.id}/edit">edit</a>
-                <a href="/cars/${car.id}/delete">delete</a>
+                <a href="/cars/${car.id}/edit" class = "flex-item">edit</a>
+                <a href="/cars/${car.id}/delete" class = "flex-item">delete</a>
             </div>
             <p>Владелец</p>
             <p>${car.owner}</p>
@@ -33,9 +33,11 @@
         </tr>
     </c:forEach>
 </table>
-
-<h2>Добавить</h2>
 <c:url value="/cars/new" var="add"/>
-<a href="${add}">Добавить новый автомобиль</a>
+<div class = "parent">
+<form action="${add}" target="_blank">
+    <button>Зарегистрировать новый автомобиль</button>
+</form>
+</div>
 </body>
 </html>

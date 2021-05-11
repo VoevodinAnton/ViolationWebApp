@@ -11,7 +11,14 @@
 <html>
 <head>
     <meta charset="utf-8">
-    <title>Регистрация нового автомобиля</title>
+    <c:choose>
+        <c:when test="${empty car.number}">
+            <title>Add</title>
+        </c:when>
+        <c:otherwise>
+            <title>Edit</title>
+        </c:otherwise>
+    </c:choose>
 </head>
 <body>
 <style media="screen">
@@ -28,8 +35,9 @@
     }
 </style>
 <h2>Регистрация автомобиля</h2>
-<c:url value="/cars/new" var="var"/>
-<form action="${var}" method="POST">
+<c:url value="/cars/new" var="addUrl"/>
+<c:url value="/edit" var="editUrl"/>
+<form action="${empty car.number ? addUrl : editUrl}" name="car" method="POST">
 <div class="flex-content">
     <p class = "item">Номер автомобиля</p>
     <input type="text" name = "number" placeholder="number" value = "${car.number}" class = "item" REQUIRED>
