@@ -63,7 +63,6 @@ public class CarsController {
 
     @PostMapping("/{id}")
     public ModelAndView update(@ModelAttribute("car") Car carUpdated, @PathVariable("id") int id){
-        System.out.println(carUpdated.getOwner());
         ModelAndView modelAndView = new ModelAndView();
         carDAO.update(id, carUpdated);
         modelAndView.setViewName("redirect:/cars");

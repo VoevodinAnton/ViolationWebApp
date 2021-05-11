@@ -35,7 +35,7 @@
 </table>
 <c:url value="/cars/new" var="add"/>
 <div class = "parent">
-<form action="${add}" target="_blank">
+<form action="${add}" >
     <button>Зарегистрировать новый автомобиль</button>
 </form>
 </div>
