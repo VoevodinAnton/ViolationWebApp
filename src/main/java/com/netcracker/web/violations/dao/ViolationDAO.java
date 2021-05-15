@@ -2,6 +2,7 @@ package com.netcracker.web.violations.dao;
 
 import com.netcracker.web.violations.model.Car;
 import com.netcracker.web.violations.model.Violation;
+import com.netcracker.web.violations.model.ViolationOutput;
 
 import java.util.List;
 
@@ -9,7 +10,7 @@ public interface ViolationDAO {
 
     void save(Violation violation);
 
-    void update(int id, Violation violation);
+    void update(int id, ViolationOutput violation);
 
     Violation get(int id);
 
@@ -20,4 +21,8 @@ public interface ViolationDAO {
     void delete(int id);
 
     List<Violation> allViolations();
+
+    ViolationOutput convertToOutput(Violation violation);
+
+    Violation outputToViolation(ViolationOutput output);
 }

@@ -18,7 +18,7 @@
 <h2>Поиск штрафов</h2>
 <div class="parent">
     <button type="button" name="find">Найти</button><br>
-    <form action="/cars" target="_blank">
+    <form action="/cars">
         <button>Открыть базу данных автомобилей</button>
     </form>
 </div>
@@ -31,8 +31,8 @@
                         <div class="flex-item"> ${violation.fineType} </div>
                         <div class="flex-item"> ${violation.status} </div>
                         <div class="flex-item"> ${violation.carNumber} </div>
-                        <div class="flex-item"> Удалить </div>
-                        <div class="flex-item"> Редактировать </div>
+                        <a href="/violations/${violation.id}/edit" class = "flex-item">edit</a>
+                        <a href="/violations/${violation.id}/delete" class = "flex-item">delete</a>
                     </div>
                     <p>${violation.fineAmount}</p>
                     <p>${violation.address}</p>

@@ -1,6 +1,6 @@
 package com.netcracker.web.violations.model;
 
-import java.util.Date;
+import java.sql.Date;
 
 public class ViolationOutput {
     private Integer id;
@@ -9,7 +9,7 @@ public class ViolationOutput {
     private String address;
     private String carNumber;
     private String fineType;
-    private Integer fineAmount;
+    private Integer fineAmount = 0;
 
     public Integer getId() {
         return id;

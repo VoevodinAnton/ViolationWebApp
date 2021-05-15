@@ -18,13 +18,11 @@ import java.util.ArrayList;
     @RequestMapping("/violations")
     public class ViolationsController {
         private final ViolationsDAOImpl violationDAO;
-        private final CarDAOImpl carDAO;
         private final FineDAOImpl fineDAO;
 
         @Autowired
-        public ViolationsController(ViolationsDAOImpl violationDAO, CarDAOImpl carDAO, FineDAOImpl fineDAO) {
+        public ViolationsController(ViolationsDAOImpl violationDAO, FineDAOImpl fineDAO) {
             this.violationDAO = violationDAO;
-            this.carDAO = carDAO;
             this.fineDAO = fineDAO;
         }
 
@@ -35,13 +33,7 @@ import java.util.ArrayList;
             modelAndView.setViewName("violations/violations_page");
             ArrayList<ViolationOutput> violations = new ArrayList<>();
             for(Violation violation : violationDAO.allViolations()){
-                ViolationOutput violationAdd = new ViolationOutput();
-                violationAdd.setId(violation.getId());
-                violationAdd.setDate(violation.getDate());
-                violationAdd.setAddress(violation.getAddress());
-                violationAdd.setCarNumber(carDAO.get(violation.getId_car()).getNumber());
-                violationAdd.setFineType(fineDAO.get(violation.getId_fine()).getType());
-                violationAdd.setFineAmount(fineDAO.get(violation.getId_fine()).getAmount());
+                ViolationOutput violationAdd = violationDAO.convertToOutput(violation);
                 violations.add(violationAdd);
             }
             modelAndView.addObject("violations", violations);
@@ -54,19 +46,19 @@ import java.util.ArrayList;
             return modelAndView;
         }
 
-        @GetMapping("/new")
+        /*@GetMapping("/new")
         public ModelAndView newViolation(@ModelAttribute("violation") Violation violation) {
             ModelAndView modelAndView = new ModelAndView();
             modelAndView.setViewName("violations/new");
             return modelAndView;
-        }
+        }*/
 
         //TODO: не уверен в url, место возможной ошибки
         @PostMapping()
         public ModelAndView create(@ModelAttribute("violation") Violation violation, BindingResult bindingResult) {
             ModelAndView modelAndView = new ModelAndView();
             if (bindingResult.hasErrors()) {
-                modelAndView.setViewName("cars/new");
+                modelAndView.setViewName("violations/new");
             }
             violationDAO.save(violation);
             modelAndView.setViewName("redirect:/violations");
@@ -77,7 +69,16 @@ import java.util.ArrayList;
         public ModelAndView edit(@PathVariable("id") int id) {
             ModelAndView modelAndView = new ModelAndView();
             modelAndView.setViewName("violations/edit");
-            modelAndView.addObject("violation", violationDAO.get(id));
+            modelAndView.addObject("violationOutput", violationDAO.convertToOutput(violationDAO.get(id)));
+            modelAndView.addObject("fines", fineDAO.allFines());
             return modelAndView;
         }
+
+    @PostMapping("/{id}")
+    public ModelAndView update(@ModelAttribute("violationOutput") ViolationOutput violationUpdated, @PathVariable("id") int id){
+        ModelAndView modelAndView = new ModelAndView();
+        violationDAO.update(id, violationUpdated);
+        modelAndView.setViewName("redirect:/violations");
+        return modelAndView;
+    }
 }

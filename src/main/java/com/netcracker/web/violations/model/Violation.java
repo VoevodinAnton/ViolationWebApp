@@ -1,6 +1,7 @@
 package com.netcracker.web.violations.model;
 
-import java.util.Date;
+
+import java.sql.Date;
 
 public class Violation {
     private Integer id;
@@ -13,7 +14,6 @@ public class Violation {
     public Integer getId() {
         return id;
     }
-
     public void setId(Integer id) {
         this.id = id;
     }

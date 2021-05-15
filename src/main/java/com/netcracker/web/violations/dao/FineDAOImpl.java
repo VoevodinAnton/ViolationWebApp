@@ -5,6 +5,7 @@ import com.netcracker.web.violations.model.Fine;
 import org.springframework.stereotype.Component;
 
 import java.sql.*;
+import java.util.ArrayList;
 import java.util.List;
 
 @Component
@@ -81,6 +82,24 @@ public class FineDAOImpl implements FineDAO {
 
     @Override
     public List<Fine> allFines() {
-        return null;
+        List<Fine> fines = new ArrayList<>();
+        try {
+            Statement statement = connection.createStatement();
+            String SQL = "SELECT * FROM Fine";
+            ResultSet resultSet = statement.executeQuery(SQL);
+
+            while (resultSet.next()) {
+                Fine fine = new Fine();
+
+                fine.setId(resultSet.getInt("id"));
+                fine.setType(resultSet.getString("type"));
+                fine.setAmount(resultSet.getInt("amout"));
+
+                fines.add(fine);
+            }
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+        return fines;
     }
 }
