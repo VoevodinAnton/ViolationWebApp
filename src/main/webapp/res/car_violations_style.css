@@ -1,0 +1,57 @@
+@import url('https://fonts.googleapis.com/css2?family=Open+Sans&display=swap');
+@import url('nullstyle.css');
+body{
+    font-family: 'Open Sans', sans-serif;
+    margin-left: 5%;
+}
+.cap{
+    padding:1%;
+    margin-left: -5%;
+    color:white;
+    font-size: 20px;
+    background-color: black;
+}
+.car-description{
+    border: 1px solid black;
+    border-radius: 0 0 10px 10px;
+    padding: 1%;
+}
+.flex-content{
+    display: flex;
+}
+.item{
+    margin-right: 1%;
+}
+._header{
+    color: #7C7C7C;
+    font-style: oblique;
+}
+.component{
+    margin: 1%;
+}
+.flex-container{
+    width: 100%;
+    display: flex;
+    margin: 0 -5px;
+}
+
+.flex-item{
+    display: block;
+    margin: 0 5px;
+    padding-right: 30px;
+    flex-grow: 1;
+}
+table{
+    margin-right: 5%;
+    margin-top: 2%;
+    width: 95%;
+    border-collapse: separate;
+}
+
+
+table tr td{
+    border: 1px solid #000000;
+    border-radius: 15px;
+    padding: 10px;
+    margin: 1%;
+}
