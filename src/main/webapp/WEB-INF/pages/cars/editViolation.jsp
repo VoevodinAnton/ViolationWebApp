@@ -28,9 +28,10 @@
         padding-right: 20px;
     }
 </style>
-<h2>Регистрирование правонарушения</h2>
-<c:url value="/cars/${car.id}/violations/new" var="var"/>
+<h2>Редактирование правонарушения</h2>
+<c:url value="/cars/${car.id}/violations/${violation.id}" var="var"/>
 <form action="${var}" method="POST">
+    <input name="_method" type="hidden" value="patch">
     <div class="flex-content">
         <p class = "item">Место нарушения</p>
         <input type="text" name="address" placeholder="адрес" value="${violation.address}" class = "item" required>
@@ -43,7 +44,7 @@
         <p class="item">Оплачен</p>
         <input type="checkbox" name="status" value="${violation.status}">
     </div>
-    <input type="submit" value="Зарегистрировать правонарушение">
+    <input type="submit" value="Редактировать правонарушение">
 </form>
 </body>
 </html>

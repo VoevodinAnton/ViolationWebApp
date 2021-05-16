@@ -24,8 +24,19 @@
             <div class = "flex-container">
                 <div class = "flex-item">${car.number}</div>
                 <div class = "flex-item">${car.model}</div>
-                <a href="/cars/${car.id}/edit" class = "flex-item">edit</a>
-                <a href="/cars/${car.id}/delete" class = "flex-item">delete</a>
+                <c:url var="carViolations" value="/cars/${car.id}/violations"/>
+                <form action="${carViolations}">
+                    <input type="submit" value="Посмотреть штрафы на этот автомобиль" />
+                </form>
+                <c:url var="update" value="/cars/${car.id}/edit"/>
+                <form action="${update}">
+                    <input type="submit" value="Редактировать" />
+                </form>
+                <c:url var="delete" value="/cars/${car.id}"/>
+                <form action="${delete}" method="Post">
+                    <input name="_method" type="hidden" value="delete">
+                    <input type="submit" value="Удалить" />
+                </form>
             </div>
             <p>Владелец</p>
             <p>${car.owner}</p>

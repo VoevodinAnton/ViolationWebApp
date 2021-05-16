@@ -29,7 +29,8 @@
 </style>
 <h2>Редактирование автомобиля</h2>
 <c:url value="/cars/${car.id}" var="var"/>
-<form action="${var}" method="POST">
+<form action="${var}" method="Post">
+    <input name="_method" type="hidden" value="patch">
     <div class="flex-content">
         <p class = "item">Номер автомобиля</p>
         <input type="text" name = "number" placeholder="number" value = "${car.number}" class = "item" REQUIRED>
@@ -42,6 +43,7 @@
         <p class = "item">Владелец</p>
         <input type="text" name="owner" value="${car.owner}" class = "item" required>
     </div>
+
     <input type="submit" value="Редактировать автомобиль">
 </form>
 </body>
