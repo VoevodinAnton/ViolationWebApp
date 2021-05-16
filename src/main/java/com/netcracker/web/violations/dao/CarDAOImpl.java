@@ -1,10 +1,12 @@
 package com.netcracker.web.violations.dao;
 
 import com.netcracker.web.violations.model.Car;
+import com.netcracker.web.violations.model.Violation;
 import org.springframework.jdbc.core.JdbcTemplate;
 import org.springframework.stereotype.Component;
 
 import javax.sql.DataSource;
+import javax.swing.*;
 import java.sql.*;
 import java.util.ArrayList;
 import java.util.List;
@@ -132,5 +134,35 @@ public class CarDAOImpl implements CarDAO {
             e.printStackTrace();
         }
         return cars;
+    }
+
+    @Override
+    public List<Violation> showViolations(int idCar) {
+        List<Violation> violations = new ArrayList<>();
+        try {
+            PreparedStatement preparedStatement =
+                    connection.prepareStatement("SELECT * FROM Violation WHERE id_car=?");
+
+            preparedStatement.setInt(1, idCar);
+
+            ResultSet resultSet = preparedStatement.executeQuery();
+
+            while (resultSet.next()) {
+                Violation violation = new Violation();
+
+                violation.setId(resultSet.getInt("id"));
+                violation.setDate(resultSet.getDate("date"));
+                violation.setStatus(resultSet.getInt("status"));
+                violation.setAddress(resultSet.getString("address"));
+                violation.setId_fine(resultSet.getInt("id_fine"));
+                violation.setId_car(resultSet.getInt("id_car"));
+
+                violations.add(violation);
+            }
+        } catch (SQLException e){
+            e.printStackTrace();
+        }
+        return violations;
+
     }
 }

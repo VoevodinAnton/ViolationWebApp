@@ -11,9 +11,9 @@ import java.util.List;
 @Component
 public class ViolationsDAOImpl implements ViolationDAO{
 
-    private static String url = "jdbc:postgresql://localhost:5432/Violations";
+    private static String url = "jdbc:postgresql://localhost:5432/violations";
     private static String username = "postgres";
-    private static String password = "Vegetable*1";
+    private static String password = "avoeva";
     private static Connection connection;
 
     static {
@@ -49,18 +49,16 @@ public class ViolationsDAOImpl implements ViolationDAO{
 
     @Override
     public void update(int id, ViolationOutput violationOutput) {
-        Violation violation = outputToViolation(violationOutput);
+        Violation violation = violationOutput;
         try {
             PreparedStatement preparedStatement =
                     connection.prepareStatement(
-                            "UPDATE Violation SET date =?, status=?, address=?, id_fine=?, id_car=? WHERE id=?");
+                            "UPDATE Violation SET date =?, status=?, address=? WHERE id=?");
 
             preparedStatement.setDate(1, violation.getDate());
             preparedStatement.setInt(2, violation.getStatus());
             preparedStatement.setString(3, violation.getAddress());
-            preparedStatement.setInt(4, violation.getId_fine());
-            preparedStatement.setInt(5, violation.getId_car());
-            preparedStatement.setInt(6, id);
+            preparedStatement.setInt(4, id);
 
             preparedStatement.executeUpdate();
         } catch (SQLException e) {
@@ -104,7 +102,17 @@ public class ViolationsDAOImpl implements ViolationDAO{
 
     @Override
     public void delete(int id) {
+        PreparedStatement preparedStatement =
+                null;
+        try {
+            preparedStatement = connection.prepareStatement("DELETE FROM Violation WHERE id=?");
 
+            preparedStatement.setInt(1, id);
+
+            preparedStatement.executeUpdate();
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
     }
 
     @Override
