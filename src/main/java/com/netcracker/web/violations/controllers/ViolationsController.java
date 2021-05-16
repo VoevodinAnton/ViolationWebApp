@@ -69,7 +69,8 @@ import java.util.ArrayList;
         public ModelAndView edit(@PathVariable("id") int id) {
             ModelAndView modelAndView = new ModelAndView();
             modelAndView.setViewName("violations/edit");
-            modelAndView.addObject("violationOutput", violationDAO.convertToOutput(violationDAO.get(id)));
+            ViolationOutput violationOutput = violationDAO.convertToOutput(violationDAO.get(id));
+            modelAndView.addObject("violationOutput", violationOutput);
             modelAndView.addObject("fines", fineDAO.allFines());
             return modelAndView;
         }

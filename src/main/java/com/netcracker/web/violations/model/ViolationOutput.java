@@ -2,7 +2,7 @@ package com.netcracker.web.violations.model;
 
 import java.sql.Date;
 
-public class ViolationOutput extends Violation {
+public class ViolationOutput {
     private Integer id;
     private Date date;
     private Integer status;

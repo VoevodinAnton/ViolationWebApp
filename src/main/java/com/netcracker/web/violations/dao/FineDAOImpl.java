@@ -11,9 +11,9 @@ import java.util.List;
 @Component
 public class FineDAOImpl implements FineDAO {
 
-    private static String url = "jdbc:postgresql://localhost:5432/violations";
+    private static String url = "jdbc:postgresql://localhost:5432/Violations";
     private static String username = "postgres";
-    private static String password = "avoeva";
+    private static String password = "Vegetable*1";
     private static Connection connection;
 
     static {
@@ -93,7 +93,7 @@ public class FineDAOImpl implements FineDAO {
 
                 fine.setId(resultSet.getInt("id"));
                 fine.setType(resultSet.getString("type"));
-                fine.setAmount(resultSet.getInt("amout"));
+                fine.setAmount(resultSet.getInt("amount"));
 
                 fines.add(fine);
             }

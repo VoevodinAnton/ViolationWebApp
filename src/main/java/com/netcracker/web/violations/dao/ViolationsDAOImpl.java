@@ -11,9 +11,9 @@ import java.util.List;
 @Component
 public class ViolationsDAOImpl implements ViolationDAO{
 
-    private static String url = "jdbc:postgresql://localhost:5432/violations";
+    private static String url = "jdbc:postgresql://localhost:5432/Violations";
     private static String username = "postgres";
-    private static String password = "avoeva";
+    private static String password = "Vegetable*1";
     private static Connection connection;
 
     static {
@@ -49,16 +49,17 @@ public class ViolationsDAOImpl implements ViolationDAO{
 
     @Override
     public void update(int id, ViolationOutput violationOutput) {
-        Violation violation = violationOutput;
+        Violation violation = outputToViolation(violationOutput);
         try {
-            PreparedStatement preparedStatement =
-                    connection.prepareStatement(
-                            "UPDATE Violation SET date =?, status=?, address=? WHERE id=?");
+            PreparedStatement preparedStatement = connection.prepareStatement(
+            "UPDATE Violation SET date =?, status=?, address=?, id_fine=?, id_car=? WHERE id=?");
 
             preparedStatement.setDate(1, violation.getDate());
             preparedStatement.setInt(2, violation.getStatus());
             preparedStatement.setString(3, violation.getAddress());
-            preparedStatement.setInt(4, id);
+            preparedStatement.setInt(4, violation.getId_fine());
+            preparedStatement.setInt(5, violation.getId_car());
+            preparedStatement.setInt(6, id);
 
             preparedStatement.executeUpdate();
         } catch (SQLException e) {
@@ -179,15 +180,16 @@ public class ViolationsDAOImpl implements ViolationDAO{
         //находим данные из связанных таблиц
         try {
             Statement statement = connection.createStatement();
-            String SQL = "SELECT id FROM Car WHERE number = " + output.getCarNumber();
+            String SQL = "SELECT id FROM Car WHERE number = \'" + output.getCarNumber()+"\'";
             ResultSet resultSet = statement.executeQuery(SQL);
             resultSet.next();
             violation.setId_car(resultSet.getInt("id"));
 
-            SQL = "SELECT id FROM Fine WHERE type = " + output.getFineType() + " AND amount = " + output.getFineAmount();
-            resultSet = statement.executeQuery(SQL);
-            resultSet.next();
-            violation.setId_fine(resultSet.getInt("id"));
+            Statement statement1 = connection.createStatement();
+            SQL = "SELECT id FROM Fine WHERE type = \'" + output.getFineType() + "\'";
+            ResultSet resultSet1 = statement1.executeQuery(SQL);
+            resultSet1.next();
+            violation.setId_fine(resultSet1.getInt("id"));
         }catch (SQLException throwables) {
             throwables.printStackTrace();
         }

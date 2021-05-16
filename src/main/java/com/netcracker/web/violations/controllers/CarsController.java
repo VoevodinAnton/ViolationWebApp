@@ -13,6 +13,8 @@ import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.servlet.ModelAndView;
 
+import java.util.ArrayList;
+
 @Controller
 @RequestMapping("/cars")
 public class CarsController {
@@ -58,7 +60,12 @@ public class CarsController {
     public ModelAndView showCarViolations(@PathVariable("id") int idCar) {
         ModelAndView modelAndView = new ModelAndView();
         modelAndView.setViewName("cars/car_violations");
-        modelAndView.addObject("carViolations", carDAO.showViolations(idCar));
+        ArrayList<ViolationOutput> violations = new ArrayList<>();
+        for(Violation violation : carDAO.showViolations(idCar)){
+            ViolationOutput violationAdd = violationsDAO.convertToOutput(violation);
+            violations.add(violationAdd);
+        }
+        modelAndView.addObject("carViolations",violations);
         modelAndView.addObject("car", carDAO.get(idCar));
         return modelAndView;
     }

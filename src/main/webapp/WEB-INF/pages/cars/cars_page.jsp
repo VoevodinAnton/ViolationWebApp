@@ -15,7 +15,11 @@
 <body>
 <style>
     <%@include file='/res/cars_style.css' %>
+    <%@include file='/res/nullstyle.css'%>
 </style>
+<div class = "cap">
+    <h1>Портал учета нарушений ПДД</h1>
+</div>
 <h2>База данных автомобилей</h2>
 <table>
     <c:forEach var="car" items="${cars}">

@@ -14,7 +14,11 @@
 <body>
 <style>
     <%@include file='/res/violations_style.css' %>
+    <%@include file='/res/nullstyle.css'%>
 </style>
+<div class = "cap">
+    <h1>Портал учета нарушений ПДД</h1>
+</div>
 <h2>Поиск штрафов</h2>
 <div class="parent">
     <button type="button" name="find">Найти</button><br>
@@ -31,8 +35,15 @@
                         <div class="flex-item"> ${violation.fineType} </div>
                         <div class="flex-item"> ${violation.status} </div>
                         <div class="flex-item"> ${violation.carNumber} </div>
-                        <a href="/violations/${violation.id}/edit" class = "flex-item">edit</a>
-                        <a href="/violations/${violation.id}/delete" class = "flex-item">delete</a>
+                        <c:url var="update" value="/cars/${car.id}/edit"/>
+                        <form action="${update}">
+                            <input type="submit" value="Редактировать" />
+                        </form>
+                        <c:url var="delete" value="/cars/${car.id}"/>
+                        <form action="${delete}" method="Post">
+                            <input name="_method" type="hidden" value="delete">
+                            <input type="submit" value="Удалить" />
+                        </form>
                     </div>
                     <p>${violation.fineAmount}</p>
                     <p>${violation.address}</p>

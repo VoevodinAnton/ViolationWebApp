@@ -1,5 +1,5 @@
 @import url('https://fonts.googleapis.com/css2?family=Open+Sans&display=swap');
-@import url('nullstyle.css');
+@import url('/res/nullstyle.css');
 body{
     font-family: 'Open Sans', sans-serif;
     margin-left: 5%;
@@ -9,7 +9,7 @@ body{
     margin-left: -5%;
     color:white;
     font-size: 20px;
-    background-color: black;
+    background-color: #0A0C29;
 }
 .car-description{
     border: 1px solid black;
@@ -54,4 +54,28 @@ table tr td{
     border-radius: 15px;
     padding: 10px;
     margin: 1%;
+}
+.parent{
+    width: 70%;
+    margin: auto;
+}
+button{
+    width: 100%;
+    margin: 5px;
+    height: 30px;
+    border-radius: 10px;
+    border: 0px;
+    background-color: #0A0C29;
+    color: white;
+    font-weight: 700;
+}
+input{
+    padding: 2px;
+    margin: 5px;
+    height: 30px;
+    border-radius: 10px;
+    border: 0px;
+    background-color: #0A0C29;
+    color: white;
+    font-weight: 700;
 }

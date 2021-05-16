@@ -2,6 +2,14 @@
 @import url('../res/nullstyle.css');
 body{
     font-family: 'Open Sans', sans-serif;
+    margin-left: 5%;
+}
+.cap{
+    padding:1%;
+    margin-left: -5%;
+    color:white;
+    font-size: 20px;
+    background-color: #0A0C29;
 }
 .flex-container{
     width: 100%;
@@ -43,6 +51,16 @@ button{
     height: 30px;
     border-radius: 10px;
     border: 0px;
-    background-color: #FFDA59;
+    background-color: #0A0C29;
     color: white;
+    font-weight: 700;
+}
+input{
+    padding: 2px;
+    height: 30px;
+    border-radius: 5px;
+    border: 0px;
+    background-color: #0A0C29;
+    color: white;
+    font-weight: 700;
 }

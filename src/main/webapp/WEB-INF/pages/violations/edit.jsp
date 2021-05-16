@@ -33,7 +33,7 @@
 <form action="${var}" method="POST">
     <div class="flex-content">
         <p class = "item">Номер автомобиля</p>
-        <input type="text" name = "number" placeholder="number" value = "${violationOutput.carNumber}" class = "item" REQUIRED>
+        <input type="text" name = "carNumber" placeholder="number" value = "${violationOutput.carNumber}" class = "item" REQUIRED>
     </div>
     <div class="flex-content">
         <p class = "item">Вид правонарушения</p>
@@ -45,11 +45,11 @@
     </div>
     <div class="flex-content">
         <p class = "item">Место нарушения</p>
-        <input type="text" name="model" placeholder="model" value="${violationOutput.address}" class = "item" required>
+        <input type="text" name="address" value="${violationOutput.address}" class = "item" required>
     </div>
     <div class="flex-content">
         <p class = "item">Время нарушения</p>
-        <input type="text" name="owner" value="${violationOutput.date}" class = "item" required>
+        <input type="text" name="date" value="${violationOutput.date}" class = "item" required>
     </div>
     <div class="flex-content">
         <p class="item">Оплачен</p>

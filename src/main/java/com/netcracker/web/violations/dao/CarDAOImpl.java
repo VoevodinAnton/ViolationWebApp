@@ -2,6 +2,7 @@ package com.netcracker.web.violations.dao;
 
 import com.netcracker.web.violations.model.Car;
 import com.netcracker.web.violations.model.Violation;
+import com.netcracker.web.violations.model.ViolationOutput;
 import org.springframework.jdbc.core.JdbcTemplate;
 import org.springframework.stereotype.Component;
 
@@ -14,9 +15,9 @@ import java.util.List;
 @Component
 public class CarDAOImpl implements CarDAO {
 
-    private static String url = "jdbc:postgresql://localhost:5432/violations";
+    private static String url = "jdbc:postgresql://localhost:5432/Violations";
     private static String username = "postgres";
-    private static String password = "avoeva";
+    private static String password = "Vegetable*1";
     private static Connection connection;
 
     static {
