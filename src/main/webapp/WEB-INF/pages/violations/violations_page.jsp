@@ -35,11 +35,11 @@
                         <div class="flex-item"> ${violation.fineType} </div>
                         <div class="flex-item"> ${violation.status} </div>
                         <div class="flex-item"> ${violation.carNumber} </div>
-                        <c:url var="update" value="/cars/${car.id}/edit"/>
+                        <c:url var="update" value="/violations/${violation.id}/edit"/>
                         <form action="${update}">
                             <input type="submit" value="Редактировать" />
                         </form>
-                        <c:url var="delete" value="/cars/${car.id}"/>
+                        <c:url var="delete" value="/violations/${violation.id}"/>
                         <form action="${delete}" method="Post">
                             <input name="_method" type="hidden" value="delete">
                             <input type="submit" value="Удалить" />
