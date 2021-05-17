@@ -15,9 +15,9 @@ import java.util.List;
 @Component
 public class CarDAOImpl implements CarDAO {
 
-    private static String url = "jdbc:postgresql://localhost:5432/Violations";
+    private static String url = "jdbc:postgresql://localhost:5432/violations";
     private static String username = "postgres";
-    private static String password = "Vegetable*1";
+    private static String password = "avoeva";
     private static Connection connection;
 
     static {

@@ -76,7 +76,7 @@ import java.util.ArrayList;
         }
 
     @PostMapping("/{id}")
-    public ModelAndView update(@ModelAttribute("violationOutput") ViolationOutput violationUpdated, @PathVariable("id") int id){
+    public ModelAndView update(@ModelAttribute("violationOutput") Violation violationUpdated, @PathVariable("id") int id){
         ModelAndView modelAndView = new ModelAndView();
         violationDAO.update(id, violationUpdated);
         modelAndView.setViewName("redirect:/violations");

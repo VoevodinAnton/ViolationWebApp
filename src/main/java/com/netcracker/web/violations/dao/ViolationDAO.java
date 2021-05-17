@@ -10,7 +10,7 @@ public interface ViolationDAO {
 
     void save(Violation violation);
 
-    void update(int id, ViolationOutput violation);
+    void update(int id, Violation violation);
 
     Violation get(int id);
 

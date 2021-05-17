@@ -2,6 +2,7 @@ package com.netcracker.web.violations.controllers;
 
 
 import com.netcracker.web.violations.dao.CarDAOImpl;
+import com.netcracker.web.violations.dao.FineDAOImpl;
 import com.netcracker.web.violations.dao.ViolationDAO;
 import com.netcracker.web.violations.dao.ViolationsDAOImpl;
 import com.netcracker.web.violations.model.Car;
@@ -20,11 +21,13 @@ import java.util.ArrayList;
 public class CarsController {
     private final CarDAOImpl carDAO;
     private final ViolationsDAOImpl violationsDAO;
+    private final FineDAOImpl fineDAO;
 
     @Autowired
-    public CarsController(CarDAOImpl carDAO, ViolationsDAOImpl violationsDAO) {
+    public CarsController(CarDAOImpl carDAO, ViolationsDAOImpl violationsDAO, FineDAOImpl fineDAO) {
         this.carDAO = carDAO;
         this.violationsDAO = violationsDAO;
+        this.fineDAO = fineDAO;
     }
 
 
@@ -75,6 +78,7 @@ public class CarsController {
         ModelAndView modelAndView = new ModelAndView();
         modelAndView.setViewName("violations/new");
         modelAndView.addObject("car", carDAO.get(idCar));
+        modelAndView.addObject("fines", fineDAO.allFines());
         return modelAndView;
     }
 
@@ -84,23 +88,30 @@ public class CarsController {
         //if (bindingResult.hasErrors()) {
         //  modelAndView.setViewName("cars/new");
         // }
+        violation.setId_car(idCar);
+
+        //TODO: заглушка, убрать когда будет починен чекбокс
+        violation.setStatus(1);
+
         violationsDAO.save(violation);
         modelAndView.setViewName("redirect:/cars/" + idCar + "/violations");
         return modelAndView;
     }
 
     @GetMapping("/{id}/violations/{idViolation}/edit")
-    public ModelAndView updateViolation(@PathVariable("idViolation") int idViolation, @PathVariable("id") int id){
+    public ModelAndView editViolation(@PathVariable("idViolation") int idViolation, @PathVariable("id") int id){
         ModelAndView modelAndView = new ModelAndView();
         modelAndView.addObject("violation", violationsDAO.get(idViolation));
         modelAndView.addObject("car", carDAO.get(id));
+        modelAndView.addObject("fines", fineDAO.allFines());
         modelAndView.setViewName("/cars/editViolation");
         return modelAndView;
     }
 
     @PatchMapping("/{id}/violations/{idViolation}")
-    public ModelAndView updateViolation(@ModelAttribute("violation") ViolationOutput violationUpdated, @PathVariable("idViolation") int idViolation, @PathVariable("id") int idCar) {
+    public ModelAndView updateViolation(@ModelAttribute("violation") Violation violationUpdated, @PathVariable("idViolation") int idViolation, @PathVariable("id") int idCar) {
         ModelAndView modelAndView = new ModelAndView();
+        violationUpdated.setId_car(idCar);
         violationsDAO.update(idViolation, violationUpdated);
         modelAndView.setViewName("redirect:/cars/" + idCar + "/violations");
 

@@ -33,9 +33,9 @@
 <form action="${var}" method="POST">
     <div class="flex-content">
         <p class = "item">Вид правонарушения</p>
-        <form:select path = "violation.fineType">
+        <form:select path = "violation.id_fine">
             <c:forEach var="fine" items="${fines}">
-                <form:option value="${fine.type}">${fine.type}</form:option>
+                <form:option value="${fine.id}">${fine.type}</form:option>
             </c:forEach>
         </form:select>
     </div>

@@ -28,10 +28,18 @@
         padding-right: 20px;
     }
 </style>
-<h2>Редактирование правонарушения</h2>
+<h2>Редактирование правонарушения на автомобиль ${car.number}</h2>
 <c:url value="/cars/${car.id}/violations/${violation.id}" var="var"/>
 <form action="${var}" method="POST">
     <input name="_method" type="hidden" value="patch">
+    <div class="flex-content">
+        <p class = "item">Вид правонарушения</p>
+        <form:select path = "violation.id_fine">
+            <c:forEach var="fine" items="${fines}">
+                <form:option value="${fine.id}">${fine.type}</form:option>
+            </c:forEach>
+        </form:select>
+    </div>
     <div class="flex-content">
         <p class = "item">Место нарушения</p>
         <input type="text" name="address" placeholder="адрес" value="${violation.address}" class = "item" required>

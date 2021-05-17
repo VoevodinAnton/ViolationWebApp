@@ -11,9 +11,9 @@ import java.util.List;
 @Component
 public class ViolationsDAOImpl implements ViolationDAO{
 
-    private static String url = "jdbc:postgresql://localhost:5432/Violations";
+    private static String url = "jdbc:postgresql://localhost:5432/violations";
     private static String username = "postgres";
-    private static String password = "Vegetable*1";
+    private static String password = "avoeva";
     private static Connection connection;
 
     static {
@@ -37,7 +37,7 @@ public class ViolationsDAOImpl implements ViolationDAO{
     public void save(Violation violation) {
         try {
             Statement statement = connection.createStatement();
-            String SQL = "INSERT INTO Violation (id, date, status, address, id_fine, id_car) VALUES('" + violation.getDate() +
+            String SQL = "INSERT INTO Violation (date, status, address, id_fine, id_car) VALUES('" + violation.getDate() +
                     "'," + violation.getStatus() + ",'" + violation.getAddress() + "'," + violation.getId_fine() +
                     "," + violation.getId_car() + ")";
 
@@ -48,12 +48,11 @@ public class ViolationsDAOImpl implements ViolationDAO{
     }
 
     @Override
-    public void update(int id, ViolationOutput violationOutput) {
-        Violation violation = outputToViolation(violationOutput);
+    public void update(int id, Violation violation) {
+
         try {
             PreparedStatement preparedStatement = connection.prepareStatement(
             "UPDATE Violation SET date =?, status=?, address=?, id_fine=?, id_car=? WHERE id=?");
-
             preparedStatement.setDate(1, violation.getDate());
             preparedStatement.setInt(2, violation.getStatus());
             preparedStatement.setString(3, violation.getAddress());
@@ -180,13 +179,13 @@ public class ViolationsDAOImpl implements ViolationDAO{
         //находим данные из связанных таблиц
         try {
             Statement statement = connection.createStatement();
-            String SQL = "SELECT id FROM Car WHERE number = \'" + output.getCarNumber()+"\'";
+            String SQL = "SELECT id FROM Car WHERE number = '" + output.getCarNumber()+ "'";
             ResultSet resultSet = statement.executeQuery(SQL);
             resultSet.next();
             violation.setId_car(resultSet.getInt("id"));
 
             Statement statement1 = connection.createStatement();
-            SQL = "SELECT id FROM Fine WHERE type = \'" + output.getFineType() + "\'";
+            SQL = "SELECT id FROM Fine WHERE type = '" + output.getFineType() + "'";
             ResultSet resultSet1 = statement1.executeQuery(SQL);
             resultSet1.next();
             violation.setId_fine(resultSet1.getInt("id"));
