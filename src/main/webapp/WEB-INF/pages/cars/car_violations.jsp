@@ -19,7 +19,13 @@
 <div class = "cap">
     <h1>Портал учета нарушений ПДД</h1>
 </div>
+
+
 <div class="car-description">
+    <div class="component">
+        <c:url var="back" value="/cars"/>
+        <a href="${back}" class="back">Вернуться в базу данных автомобилей</a>
+    </div>
     <div class="component">
         <p class="_header">Автомобиль</p>
     </div>
@@ -36,7 +42,12 @@
         <p>${car.owner}</p>
     </div>
 </div>
-
+<c:url value="/cars/${car.id}/violations/new" var="add"/>
+<div class="parent">
+    <form action="${add}">
+        <button>Зарегистрировать штраф на этот автомобиль</button>
+    </form>
+</div>
 <table>
     <c:forEach var="violation" items="${carViolations}">
         <tr>
@@ -63,11 +74,5 @@
         </tr>
     </c:forEach>
 </table>
-<c:url value="/cars/${car.id}/violations/new" var="add"/>
-<div class="parent">
-    <form action="${add}">
-        <button>Зарегистрировать штраф на этот автомобиль</button>
-    </form>
-</div>
 </body>
 </html>

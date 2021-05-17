@@ -1,10 +1,3 @@
-<%--
-  Created by IntelliJ IDEA.
-  User: Антон
-  Date: 06.05.2021
-  Time: 12:35
-  To change this template use File | Settings | File Templates.
---%>
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <html>
@@ -20,7 +13,17 @@
 <div class = "cap">
     <h1>Портал учета нарушений ПДД</h1>
 </div>
-<h2>База данных автомобилей</h2>
+<div class="back">
+<c:url var="back" value="/violations"/>
+<a href="${back}">Вернуться в базу данных штрафов</a>
+</div>
+<h2 class="main-title">База данных автомобилей</h2>
+<c:url value="/cars/new" var="add"/>
+<div class = "parent">
+    <form action="${add}" >
+        <button>Зарегистрировать новый автомобиль</button>
+    </form>
+</div>
 <table>
     <c:forEach var="car" items="${cars}">
         <tr>
@@ -48,11 +51,5 @@
         </tr>
     </c:forEach>
 </table>
-<c:url value="/cars/new" var="add"/>
-<div class = "parent">
-<form action="${add}" >
-    <button>Зарегистрировать новый автомобиль</button>
-</form>
-</div>
 </body>
 </html>

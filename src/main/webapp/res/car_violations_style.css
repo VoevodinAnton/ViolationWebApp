@@ -2,14 +2,18 @@
 @import url('/res/nullstyle.css');
 body{
     font-family: 'Open Sans', sans-serif;
-    margin-left: 5%;
 }
 .cap{
     padding:1%;
-    margin-left: -5%;
     color:white;
     font-size: 20px;
     background-color: #0A0C29;
+}
+.back{
+    margin-top: 2%;
+    color: #0A0C29;
+    font-size: 14px;
+    text-decoration: underline;
 }
 .car-description{
     border: 1px solid black;
@@ -42,13 +46,14 @@ body{
     flex-grow: 1;
 }
 table{
-    margin-right: 5%;
-    margin-top: 2%;
-    width: 95%;
+    margin-left: 5%;
+    margin-top: 1%;
+    width: 90%;
     border-collapse: separate;
 }
-
-
+table tr{
+    margin-bottom: 5px;
+}
 table tr td{
     border: 1px solid #000000;
     border-radius: 15px;
@@ -61,7 +66,7 @@ table tr td{
 }
 button{
     width: 100%;
-    margin: 5px;
+    margin: 10px;
     height: 30px;
     border-radius: 10px;
     border: 0px;
@@ -70,7 +75,7 @@ button{
     font-weight: 700;
 }
 input{
-    padding: 2px;
+    padding: 3px;
     margin: 5px;
     height: 30px;
     border-radius: 10px;

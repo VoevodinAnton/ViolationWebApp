@@ -2,14 +2,52 @@
 @import url('../res/nullstyle.css');
 body{
     font-family: 'Open Sans', sans-serif;
-    margin-left: 5%;
 }
 .cap{
     padding:1%;
-    margin-left: -5%;
     color:white;
     font-size: 20px;
     background-color: #0A0C29;
+}
+.search{
+    margin-left: 5%;
+}
+h3{
+    margin-bottom: 1%;
+    font-weight: 700;
+}
+select{
+    margin-bottom: 1%;
+    width: 300px;
+    height: 30px;
+    border: 1px solid black;
+    border-radius: 5px;
+    font-family: 'Open Sans', sans-serif;
+}
+.main-title{
+    margin-top: 2%;
+    margin-bottom: 2%;
+    margin-left: 5%;
+    font-weight: 700;
+    font-size: 18px;
+}
+.date{
+    margin-right: 2%;
+    margin-bottom: 1%;
+    width: 150px;
+    height: 30px;
+    border: 1px solid black;
+    border-radius: 5px;
+    font-size: 14px;
+}
+.number{
+    margin-right: 2%;
+    margin-bottom: 1%;
+    width: 200px;
+    height: 30px;
+    border: 1px solid black;
+    border-radius: 5px;
+    font-size: 14px;
 }
 .flex-container{
     width: 95%;
@@ -27,11 +65,14 @@ body{
     flex-grow: 1;
 }
 table{
-    width: 95%;
-    margin: auto;
+    width: 90%;
+    margin-left: 5%;
     border-collapse: separate;
+    font-size:14px;
 }
-
+table tr{
+    margin-bottom: 5px;
+}
 
 table tr td{
     border: 1px solid #000000;
@@ -41,7 +82,7 @@ table tr td{
 }
 
 .parent{
-    width: 70%;
+    width: 90%;
     margin: auto;
 }
 
@@ -55,8 +96,8 @@ button{
     color: white;
     font-weight: 700;
 }
-input{
-    padding: 2px;
+.input-button{
+    padding: 5px;
     margin: 5px;
     height: 30px;
     border-radius: 5px;

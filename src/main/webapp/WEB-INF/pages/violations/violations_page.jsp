@@ -19,7 +19,25 @@
 <div class = "cap">
     <h1>Портал учета нарушений ПДД</h1>
 </div>
-<h2>Поиск штрафов</h2>
+    <h2 class="main-title">Поиск штрафов</h2>
+<div class="search">
+    <h3>По номеру автомобиля</h3>
+    <input type="text" class="number">
+    <h3>По дате</h3>
+    <div class="flex-container">
+        <input type="text" class="date">
+        <input type="text" class="date">
+    </div>
+    <h3>По виду правонарушения</h3>
+    <select>
+        <option>Наезд на пешехода</option>
+        <option>Превышение скорости</option>
+    </select>
+    <h3>По статусу</h3>
+    <input type="radio" name="status" value="1">Только оплаченные<br>
+    <input type="radio" name="status" value="0">Только неоплаченные<br>
+    <input type="radio" name="status" value="-1">Любые<br>
+</div>
 <div class="parent">
     <button type="button" name="find">Найти</button><br>
     <form action="/cars">
@@ -37,12 +55,12 @@
                         <div class="flex-item"> ${violation.carNumber} </div>
                         <c:url var="update" value="/violations/${violation.id}/edit"/>
                         <form action="${update}">
-                            <input type="submit" value="Редактировать" />
+                            <input type="submit" value="Редактировать" class="input-button" />
                         </form>
                         <c:url var="delete" value="/violations/${violation.id}"/>
                         <form action="${delete}" method="Post">
                             <input name="_method" type="hidden" value="delete">
-                            <input type="submit" value="Удалить" />
+                            <input type="submit" value="Удалить" class="input-button" />
                         </form>
                     </div>
                     <p>${violation.fineAmount}</p>

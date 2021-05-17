@@ -2,14 +2,26 @@
 @import url('../res/nullstyle.css');
 body{
     font-family: 'Open Sans', sans-serif;
-    margin-left: 5%;
 }
 .cap{
     padding:1%;
-    margin-left: -5%;
     color:white;
     font-size: 20px;
     background-color: #0A0C29;
+}
+.back{
+    margin-left: 5%;
+    margin-top: 5%;
+    color: #0A0C29;
+    font-size: 14px;
+    text-decoration: underline;
+}
+.main-title{
+    margin-top: 2%;
+    margin-bottom: 2%;
+    margin-left: 5%;
+    font-weight: 700;
+    font-size: 18px;
 }
 .flex-container{
     display: flex;
@@ -22,9 +34,12 @@ body{
     flex-grow: 1;
 }
 table{
-    width: 95%;
-    margin:auto;
+    margin-left: 5%;
+    width: 90%;
     border-collapse: separate;
+}
+table tr{
+    margin-bottom: 5px;
 }
 table tr td{
     border: 1px solid #3d3d3d;
@@ -32,7 +47,7 @@ table tr td{
     padding:5px;
 }
 .parent{
-    width: 70%;
+    width: 90%;
     margin: auto;
 }
 button{
@@ -46,7 +61,7 @@ button{
     color: white;
 }
 input{
-    padding: 2px;
+    padding: 5px;
     margin: 5px;
     height: 30px;
     border-radius: 10px;
