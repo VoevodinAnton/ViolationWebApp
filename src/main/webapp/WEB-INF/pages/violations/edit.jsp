@@ -32,8 +32,12 @@
 <c:url value="/violations/${violation.id}" var="var"/>
 <form action="${var}" method="POST">
     <div class="flex-content">
-        <p class = "item">Номер автомобиля</p>
-        <input type="text" name = "carNumber" placeholder="number" value = "${violation.id_car}" class = "item" REQUIRED>
+        <p class = "item">Номер</p>
+        <form:select path = "violation.id_car">
+            <c:forEach var="car" items="${cars}">
+                <form:option value="${car.id}">${car.number}</form:option>
+            </c:forEach>
+        </form:select>
     </div>
     <div class="flex-content">
         <p class = "item">Вид правонарушения</p>

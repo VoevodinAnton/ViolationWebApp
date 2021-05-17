@@ -17,11 +17,14 @@ import java.util.ArrayList;
 @Controller
 @RequestMapping("/violations")
 public class ViolationsController {
+    private final CarDAOImpl carDAO;
     private final ViolationsDAOImpl violationDAO;
     private final FineDAOImpl fineDAO;
 
+
     @Autowired
-    public ViolationsController(ViolationsDAOImpl violationDAO, FineDAOImpl fineDAO) {
+    public ViolationsController(CarDAOImpl carDAO, ViolationsDAOImpl violationDAO, FineDAOImpl fineDAO) {
+        this.carDAO = carDAO;
         this.violationDAO = violationDAO;
         this.fineDAO = fineDAO;
     }
@@ -69,6 +72,7 @@ public class ViolationsController {
     public ModelAndView edit(@PathVariable("id") int id) {
         ModelAndView modelAndView = new ModelAndView();
         modelAndView.setViewName("violations/edit");
+        modelAndView.addObject("cars", carDAO.allCars());
         modelAndView.addObject("violation", violationDAO.get(id));
         modelAndView.addObject("fines", fineDAO.allFines());
         return modelAndView;
