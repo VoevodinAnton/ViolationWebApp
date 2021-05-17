@@ -43,20 +43,7 @@ public class ViolationsController {
         return modelAndView;
     }
 
-    @GetMapping("/{id}/violations")
-    public ModelAndView showViolation(@PathVariable("id") int id) {
-        ModelAndView modelAndView = new ModelAndView();
-        return modelAndView;
-    }
 
-        /*@GetMapping("/new")
-        public ModelAndView newViolation(@ModelAttribute("violation") Violation violation) {
-            ModelAndView modelAndView = new ModelAndView();
-            modelAndView.setViewName("violations/new");
-            return modelAndView;
-        }*/
-
-    //TODO: не уверен в url, место возможной ошибки
     @PostMapping()
     public ModelAndView create(@ModelAttribute("violation") Violation violation, BindingResult bindingResult) {
         ModelAndView modelAndView = new ModelAndView();
@@ -82,6 +69,14 @@ public class ViolationsController {
     public ModelAndView update(@ModelAttribute("violation") Violation violationUpdated, @PathVariable("id") int id) {
         ModelAndView modelAndView = new ModelAndView();
         violationDAO.update(id, violationUpdated);
+        modelAndView.setViewName("redirect:/violations");
+        return modelAndView;
+    }
+
+    @DeleteMapping("/{id}")
+    public ModelAndView deleteViolation(@PathVariable("id") int id){
+        ModelAndView modelAndView = new ModelAndView();
+        violationDAO.delete(id);
         modelAndView.setViewName("redirect:/violations");
         return modelAndView;
     }
