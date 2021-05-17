@@ -39,7 +39,7 @@
 <form action="${addUrl}" name="car" method="POST">
 <div class="flex-content">
     <p class = "item">Номер автомобиля</p>
-    <input type="text" name = "number" placeholder="number" value = "${car.number}" class = "item" REQUIRED>
+    <input type="text" name = "number" placeholder="A000AA777" value = "${car.number}" class = "item" REQUIRED>
 </div>
 <div class="flex-content">
     <p class = "item">Модель</p>
