@@ -14,6 +14,7 @@ import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.servlet.ModelAndView;
 
+import javax.validation.Valid;
 import java.util.ArrayList;
 
 @Controller
@@ -48,11 +49,12 @@ public class CarsController {
     }
 
     @PostMapping("/new")
-    public ModelAndView create(@ModelAttribute("car") Car car) {
+    public ModelAndView create(@ModelAttribute("car") @Valid Car car, BindingResult bindingResult) {
         ModelAndView modelAndView = new ModelAndView();
-        //if (bindingResult.hasErrors()) {
-        //  modelAndView.setViewName("cars/new");
-        // }
+        if (bindingResult.hasErrors()) {
+            modelAndView.setViewName("cars/new");
+            return modelAndView;
+        }
         carDAO.save(car);
         modelAndView.setViewName("redirect:/cars");
         return modelAndView;
@@ -64,11 +66,11 @@ public class CarsController {
         ModelAndView modelAndView = new ModelAndView();
         modelAndView.setViewName("cars/car_violations");
         ArrayList<ViolationOutput> violations = new ArrayList<>();
-        for(Violation violation : carDAO.showViolations(idCar)){
+        for (Violation violation : carDAO.showViolations(idCar)) {
             ViolationOutput violationAdd = violationsDAO.convertToOutput(violation);
             violations.add(violationAdd);
         }
-        modelAndView.addObject("carViolations",violations);
+        modelAndView.addObject("carViolations", violations);
         modelAndView.addObject("car", carDAO.get(idCar));
         return modelAndView;
     }
@@ -99,7 +101,7 @@ public class CarsController {
     }
 
     @GetMapping("/{id}/violations/{idViolation}/edit")
-    public ModelAndView editViolation(@PathVariable("idViolation") int idViolation, @PathVariable("id") int id){
+    public ModelAndView editViolation(@PathVariable("idViolation") int idViolation, @PathVariable("id") int id) {
         ModelAndView modelAndView = new ModelAndView();
         modelAndView.addObject("violation", violationsDAO.get(idViolation));
         modelAndView.addObject("car", carDAO.get(id));
@@ -119,13 +121,12 @@ public class CarsController {
     }
 
     @DeleteMapping("/{id}/violations/{idViolation}")
-    public ModelAndView deleteViolation(@PathVariable("idViolation") int idViolation, @PathVariable("id") String idCar){
+    public ModelAndView deleteViolation(@PathVariable("idViolation") int idViolation, @PathVariable("id") String idCar) {
         ModelAndView modelAndView = new ModelAndView();
         violationsDAO.delete(idViolation);
         modelAndView.setViewName("redirect:/cars/" + idCar + "/violations");
         return modelAndView;
     }
-
 
 
     @GetMapping("/{id}/edit")
@@ -137,15 +138,20 @@ public class CarsController {
     }
 
     @PatchMapping("/{id}")
-    public ModelAndView update(@ModelAttribute("car") Car carUpdated, @PathVariable("id") int id){
+    public ModelAndView update(@ModelAttribute("car") @Valid Car carUpdated, BindingResult bindingResult, @PathVariable("id") int id) {
         ModelAndView modelAndView = new ModelAndView();
+        if (bindingResult.hasErrors()) {
+            System.out.println("error");
+            modelAndView.setViewName("redirect:/cars/" + id + "/edit");
+            return modelAndView;
+        }
         carDAO.update(id, carUpdated);
         modelAndView.setViewName("redirect:/cars");
         return modelAndView;
     }
 
     @DeleteMapping("/{id}")
-    public ModelAndView delete(@PathVariable("id") int id){
+    public ModelAndView delete(@PathVariable("id") int id) {
         ModelAndView modelAndView = new ModelAndView();
         carDAO.delete(id);
         modelAndView.setViewName("redirect:/cars");

@@ -1,7 +1,11 @@
 package com.netcracker.web.violations.model;
 
+import javax.validation.constraints.Pattern;
+
 public class Car {
     private Integer id;
+
+    @Pattern(regexp = "^[А-ЯЁ\\-\\s]{1}[0-9]{3}(?<!0{3})[А-ЯЁ\\-\\s]{2}[0-9]{3}$", message = "Неправильный номер автомобиля")
     private String number;
     private String model;
     private String owner;
