@@ -21,36 +21,36 @@
     </c:choose>
 </head>
 <body>
-<style media="screen">
-    body{
-        margin-left: 10%;
-    }
-    .flex-content{
-        display: flex;
-        margin: 5px;
-    }
-    .item{
-        margin: 0 5px;
-        padding-right: 20px;
-    }
+<style>
+    <%@include file='/res/edit-new-style.css' %>
+    <%@include file='/res/nullstyle.css'%>
 </style>
-<h2>Регистрация автомобиля</h2>
+<div class = "cap">
+    <h1>Портал учета нарушений ПДД</h1>
+</div>
+<div class="content">
+    <div class="back">
+        <c:url var="back" value="/cars"/>
+        <a href="${back}">Вернуться в базу данных автомобилей</a>
+    </div>
+<h2 class="main-title">Регистрация автомобиля</h2>
 <c:url value="/cars/new" var="addUrl"/>
 <form action="${addUrl}" name="car" method="POST">
 <div class="flex-content">
     <p class = "item">Номер автомобиля</p>
-    <input type="text" name = "number" placeholder="A000AA777" value = "${car.number}" class = "item" REQUIRED>
+    <input type="text" name = "number" placeholder="A000AA777" value = "${car.number}" class = "input-field" REQUIRED>
 </div>
 <div class="flex-content">
     <p class = "item">Модель</p>
-    <input type="text" name="model" placeholder="model" value="${car.model}" class = "item" required>
+    <input type="text" name="model" placeholder="Модель автомобиля" value="${car.model}" class = "input-field" required>
 </div>
 <div class="flex-content">
     <p class = "item">Владелец</p>
-    <input type="text" name="owner" value="${car.owner}" class = "item" required>
+    <input type="text" name="owner" value="${car.owner}" class = "input-field" required>
 </div>
-    <input type="submit" value="Зарегистрировать автомобиль">
+    <input type="submit" value="Зарегистрировать автомобиль" class="input-button">
 </form>
+</div>
 </body>
 </html>
 

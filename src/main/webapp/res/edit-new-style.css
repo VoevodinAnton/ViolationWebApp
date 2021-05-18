@@ -3,6 +3,9 @@
 body{
     font-family: 'Open Sans', sans-serif;
 }
+.content{
+    margin-left: 5%;
+}
 .cap{
     padding:1% 1% 1% 5%;
     color:white;
@@ -10,7 +13,6 @@ body{
     background-color: #0A0C29;
 }
 .back{
-    margin-left: 5%;
     margin-top: 2%;
     color: #0A0C29;
     font-size: 14px;
@@ -19,52 +21,42 @@ body{
 .main-title{
     margin-top: 2%;
     margin-bottom: 2%;
-    margin-left: 5%;
     font-weight: 700;
     font-size: 18px;
 }
-.flex-container{
+.flex-content{
     display: flex;
     margin: 0 -5px;
+    padding-bottom: 1%;
 }
-.flex-item{
+.item{
     display: block;
     margin: 0 5px;
     padding-right: 50px;
-    flex-grow: 1;
+    vertical-align: center;
 }
-table{
-    margin-left: 5%;
-    width: 90%;
-    border-collapse: separate;
-}
-table tr{
-    margin-bottom: 5px;
-}
-table tr td{
-    border: 1px solid #3d3d3d;
-    border-radius: 10px;
-    padding:5px;
-}
-.parent{
-    width: 90%;
-    margin: auto;
-}
-button{
-    width: 100%;
-    margin: 5px;
+.input-field{
+    margin-right: 2%;
+    margin-bottom: 1%;
+    width: 400px;
     height: 30px;
-    border-radius: 10px;
-    border: 0px;
-    background-color: #0A0C29;
-    font-weight: 700;
-    color: white;
+    border: 1px solid black;
+    border-radius: 5px;
+    font-size: 14px;
 }
-input{
+select{
+    margin-bottom: 1%;
+    width: 400px;
+    height: 30px;
+    border: 1px solid black;
+    border-radius: 5px;
+    font-family: 'Open Sans', sans-serif;
+}
+.input-button{
     padding: 5px;
     margin: 5px;
     height: 30px;
-    border-radius: 10px;
+    border-radius: 5px;
     border: 0px;
     background-color: #0A0C29;
     color: white;

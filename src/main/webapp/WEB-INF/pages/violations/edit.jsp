@@ -15,20 +15,19 @@
     <title>Редактирование нарушения</title>
 </head>
 <body>
-<style media="screen">
-    body{
-        margin-left: 10%;
-    }
-    .flex-content{
-        display: flex;
-        margin: 5px;
-    }
-    .item{
-        margin: 0 5px;
-        padding-right: 20px;
-    }
+<style>
+    <%@include file='/res/edit-new-style.css' %>
+    <%@include file='/res/nullstyle.css'%>
 </style>
-<h2>Редактирование правонарушения</h2>
+<div class = "cap">
+    <h1>Портал учета нарушений ПДД</h1>
+</div>
+<div class="content">
+    <div class="back">
+        <c:url var="back" value="/violations"/>
+        <a href="${back}">Вернуться в базу данных правонарушений</a>
+    </div>
+<h2 class="main-title">Редактирование правонарушения</h2>
 <c:url value="/violations/${violation.id}" var="var"/>
 <form action="${var}" method="POST">
     <div class="flex-content">
@@ -49,17 +48,17 @@
     </div>
     <div class="flex-content">
         <p class = "item">Место нарушения</p>
-        <input type="text" name="address" value="${violation.address}" class = "item" required>
+        <input type="text" name="address" value="${violation.address}" class = "input-field" required>
     </div>
     <div class="flex-content">
         <p class = "item">Время нарушения</p>
-        <input type="text" name="date" value="${violation.date}" class = "item" required>
+        <input type="text" name="date" value="${violation.date}" class = "input-field" required>
     </div>
     <div class="flex-content">
         <p class="item">Оплачен</p>
         <input type="checkbox" name="status" value="${violation.status}">
     </div>
-    <input type="submit" value="Редактировать правонарушение">
+    <input type="submit" value="Редактировать правонарушение" class="input-button">
 </form>
 </body>
 </html>
