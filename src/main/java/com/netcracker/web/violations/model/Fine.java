@@ -1,8 +1,12 @@
 package com.netcracker.web.violations.model;
 
+import javax.validation.constraints.NotBlank;
+
 public class Fine {
     private Integer id;
+    @NotBlank(message = "Поле не может быть пустым")
     private String type;
+    @NotBlank(message = "Поле не может быть пустым")
     private Integer amount;
 
     public Integer getId() {

@@ -41,15 +41,16 @@ public class CarDAOImpl implements CarDAO {
     @Override
     public void save(Car car) {
         try {
-            Statement statement = connection.createStatement();
-            String SQL = "INSERT INTO Car (number, model, owner) VALUES('" + car.getNumber() +
-                    "','" + car.getModel() + "','" + car.getOwner() + "')";
+            PreparedStatement preparedStatement =  connection.prepareStatement("INSERT INTO Car (number, model, owner) VALUES(?,?,?)");
 
-            statement.executeUpdate(SQL);
+            preparedStatement.setString(1, car.getNumber());
+            preparedStatement.setString(2, car.getModel());
+            preparedStatement.setString(3, car.getOwner());
+
+            preparedStatement.executeUpdate();
         } catch (SQLException e) {
             e.printStackTrace();
         }
-
     }
 
     @Override
@@ -113,13 +114,13 @@ public class CarDAOImpl implements CarDAO {
     }
 
     @Override
-    public List<Car> allCars() {
+    public List<Car> allCars() { //переименовать метод
         List<Car> cars = new ArrayList<>();
         try {
             Statement statement = connection.createStatement();
             String SQL = "SELECT * FROM Car";
             ResultSet resultSet = statement.executeQuery(SQL);
-
+//дублирование кода
             while (resultSet.next()) {
                 Car car = new Car();
 
@@ -136,6 +137,7 @@ public class CarDAOImpl implements CarDAO {
         return cars;
     }
 
+    //перенести в класс нарушений
     @Override
     public List<Violation> showViolations(int idCar) {
         List<Violation> violations = new ArrayList<>();
@@ -165,4 +167,5 @@ public class CarDAOImpl implements CarDAO {
         return violations;
 
     }
+
 }

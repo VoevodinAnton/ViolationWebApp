@@ -1,13 +1,21 @@
 package com.netcracker.web.violations.model;
 
+import javax.validation.constraints.NotBlank;
+import javax.validation.constraints.NotNull;
 import javax.validation.constraints.Pattern;
 
 public class Car {
+    @NotNull
     private Integer id;
 
+    @NotBlank(message = "Поле не может быть пустым")
     @Pattern(regexp = "^[А-ЯЁ\\-\\s]{1}[0-9]{3}(?<!0{3})[А-ЯЁ\\-\\s]{2}[0-9]{3}$", message = "Неправильный номер автомобиля")
     private String number;
+
+    @NotBlank(message = "Поле не может быть пустым")
     private String model;
+
+    @NotBlank(message = "Поле не может быть пустым")
     private String owner;
 
     public Car() {

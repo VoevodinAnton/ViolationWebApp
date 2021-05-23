@@ -12,6 +12,7 @@ import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.servlet.ModelAndView;
 
+import javax.validation.Valid;
 import java.util.ArrayList;
 
 @Controller
@@ -45,10 +46,11 @@ public class ViolationsController {
 
 
     @PostMapping()
-    public ModelAndView create(@ModelAttribute("violation") Violation violation, BindingResult bindingResult) {
+    public ModelAndView create(@ModelAttribute("violation") @Valid Violation violation, BindingResult bindingResult) {
         ModelAndView modelAndView = new ModelAndView();
         if (bindingResult.hasErrors()) {
             modelAndView.setViewName("violations/new");
+            return modelAndView;
         }
         violationDAO.save(violation);
         modelAndView.setViewName("redirect:/violations");
@@ -66,8 +68,17 @@ public class ViolationsController {
     }
 
     @PostMapping("/{id}")
-    public ModelAndView update(@ModelAttribute("violation") Violation violationUpdated, @PathVariable("id") int id) {
+    public ModelAndView update(@ModelAttribute("violation") @Valid Violation violationUpdated, BindingResult bindingResult, @PathVariable("id") int id) {
         ModelAndView modelAndView = new ModelAndView();
+        //TODO: заглушка, убрать когда будет починен чекбокс
+        violationUpdated.setStatus(1);
+        if (bindingResult.hasErrors()){
+            modelAndView.addObject("cars", carDAO.allCars());
+            modelAndView.addObject("violation", violationDAO.get(id));
+            modelAndView.addObject("fines", fineDAO.allFines());
+            modelAndView.setViewName("violations/edit");
+            return modelAndView;
+        }
         violationDAO.update(id, violationUpdated);
         modelAndView.setViewName("redirect:/violations");
         return modelAndView;

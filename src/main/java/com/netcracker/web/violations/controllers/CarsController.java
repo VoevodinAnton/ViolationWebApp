@@ -3,7 +3,6 @@ package com.netcracker.web.violations.controllers;
 
 import com.netcracker.web.violations.dao.CarDAOImpl;
 import com.netcracker.web.violations.dao.FineDAOImpl;
-import com.netcracker.web.violations.dao.ViolationDAO;
 import com.netcracker.web.violations.dao.ViolationsDAOImpl;
 import com.netcracker.web.violations.model.Car;
 import com.netcracker.web.violations.model.Violation;
@@ -85,16 +84,18 @@ public class CarsController {
     }
 
     @PostMapping("/{id}/violations/new")
-    public ModelAndView createViolation(@ModelAttribute("violation") Violation violation, @PathVariable("id") int idCar) {
+    public ModelAndView createViolation(@ModelAttribute("violation") @Valid Violation violation, BindingResult bindingResult, @PathVariable("id") int idCar) {
         ModelAndView modelAndView = new ModelAndView();
-        //if (bindingResult.hasErrors()) {
-        //  modelAndView.setViewName("cars/new");
-        // }
         violation.setId_car(idCar);
 
         //TODO: заглушка, убрать когда будет починен чекбокс
         violation.setStatus(1);
-
+        if (bindingResult.hasErrors()) {
+            modelAndView.addObject("car", carDAO.get(idCar));
+            modelAndView.addObject("fines", fineDAO.allFines());
+            modelAndView.setViewName("violations/new");
+            return modelAndView;
+        }
         violationsDAO.save(violation);
         modelAndView.setViewName("redirect:/cars/" + idCar + "/violations");
         return modelAndView;
@@ -103,17 +104,25 @@ public class CarsController {
     @GetMapping("/{id}/violations/{idViolation}/edit")
     public ModelAndView editViolation(@PathVariable("idViolation") int idViolation, @PathVariable("id") int id) {
         ModelAndView modelAndView = new ModelAndView();
+        modelAndView.setViewName("cars/editViolation");
         modelAndView.addObject("violation", violationsDAO.get(idViolation));
         modelAndView.addObject("car", carDAO.get(id));
         modelAndView.addObject("fines", fineDAO.allFines());
-        modelAndView.setViewName("/cars/editViolation");
         return modelAndView;
     }
 
     @PatchMapping("/{id}/violations/{idViolation}")
-    public ModelAndView updateViolation(@ModelAttribute("violation") Violation violationUpdated, @PathVariable("idViolation") int idViolation, @PathVariable("id") int idCar) {
+    public ModelAndView updateViolation(@ModelAttribute("violation") @Valid Violation violationUpdated, BindingResult bindingResult, @PathVariable("idViolation") int idViolation, @PathVariable("id") int idCar) {
         ModelAndView modelAndView = new ModelAndView();
-        violationUpdated.setId_car(idCar);
+        //TODO: заглушка, убрать когда будет починен чекбокс
+        violationUpdated.setStatus(1);
+        if (bindingResult.hasErrors()) {
+            modelAndView.addObject("violation", violationsDAO.get(idViolation));
+            modelAndView.addObject("car", carDAO.get(idCar));
+            modelAndView.addObject("fines", fineDAO.allFines());
+            modelAndView.setViewName("cars/editViolation");
+            return modelAndView;
+        }
         violationsDAO.update(idViolation, violationUpdated);
         modelAndView.setViewName("redirect:/cars/" + idCar + "/violations");
 
@@ -141,8 +150,7 @@ public class CarsController {
     public ModelAndView update(@ModelAttribute("car") @Valid Car carUpdated, BindingResult bindingResult, @PathVariable("id") int id) {
         ModelAndView modelAndView = new ModelAndView();
         if (bindingResult.hasErrors()) {
-            System.out.println("error");
-            modelAndView.setViewName("redirect:/cars/" + id + "/edit");
+            modelAndView.setViewName("cars/edit");
             return modelAndView;
         }
         carDAO.update(id, carUpdated);
