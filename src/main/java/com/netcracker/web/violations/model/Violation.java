@@ -1,15 +1,13 @@
 package com.netcracker.web.violations.model;
 
 
-import javax.validation.constraints.NotBlank;
-import javax.validation.constraints.NotEmpty;
-import javax.validation.constraints.NotNull;
+import javax.validation.constraints.*;
 import java.sql.Date;
 
 public class Violation {
     @NotNull(message = "Поле не может быть пустым")
     private Integer id;
-    @NotNull(message = "Поле не может быть пустым")  //TODO: написать регулярное выражение
+    @NotNull(message = "Поле не может быть пустым")
     private Date date;
     private Integer status;
     @NotBlank(message = "Поле не может быть пустым")

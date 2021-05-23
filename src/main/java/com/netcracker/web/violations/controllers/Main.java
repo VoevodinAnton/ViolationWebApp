@@ -3,8 +3,6 @@ package com.netcracker.web.violations.controllers;
 import com.netcracker.web.violations.model.Car;
 
 import java.sql.*;
-import java.util.ArrayList;
-import java.util.List;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
@@ -63,9 +61,6 @@ public class Main {
             int end=matcher.end();
             System.out.println("Найдено совпадение " + text.substring(start,end) + " с "+ start + " по " + (end-1) + " позицию");
         }
-
-
-
 
 
     }

@@ -47,7 +47,7 @@
         </div>
         <div class="flex-content">
             <p class="item">Дата нарушения</p>
-            <input type="text" name="date" placeholder="дата" value="${violation.date}" class="input-field">
+            <input type="text" name="date" placeholder="ГГГГ-ММ-ДД" value="${violation.date}" class="input-field">
             <form:errors path="violation.date"/>
         </div>
         <div class="flex-content">

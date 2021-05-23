@@ -14,6 +14,8 @@ import org.springframework.web.servlet.ModelAndView;
 
 import javax.validation.Valid;
 import java.util.ArrayList;
+import java.util.List;
+import java.util.Map;
 
 @Controller
 @RequestMapping("/violations")
@@ -35,6 +37,7 @@ public class ViolationsController {
     public ModelAndView allViolations() {
         ModelAndView modelAndView = new ModelAndView();
         modelAndView.setViewName("violations/violations_page");
+        modelAndView.addObject("fines", fineDAO.allFines());
         ArrayList<ViolationOutput> violations = new ArrayList<>();
         for (Violation violation : violationDAO.allViolations()) {
             ViolationOutput violationAdd = violationDAO.convertToOutput(violation);
@@ -43,6 +46,7 @@ public class ViolationsController {
         modelAndView.addObject("violations", violations);
         return modelAndView;
     }
+
 
 
     @PostMapping()
@@ -91,4 +95,22 @@ public class ViolationsController {
         modelAndView.setViewName("redirect:/violations");
         return modelAndView;
     }
+
+    @GetMapping("/search")
+    public ModelAndView search(@RequestParam Map<String,String> requestParams){
+        ModelAndView modelAndView = new ModelAndView();
+
+        List<Violation> violationList = violationDAO.searchViolation(requestParams.get("number"),requestParams.get("type"), requestParams.get("status"));
+        modelAndView.addObject("violations", violationList);
+
+        modelAndView.setViewName("violations/search_page");
+
+        return modelAndView;
+    }
+
+
+
+
+
+
 }

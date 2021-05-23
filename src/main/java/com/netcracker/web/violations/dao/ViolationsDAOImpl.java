@@ -1,7 +1,8 @@
 package com.netcracker.web.violations.dao;
 
 import com.netcracker.web.violations.model.Car;
-import com.netcracker.web.violations.model.Violation;import com.netcracker.web.violations.model.ViolationOutput;
+import com.netcracker.web.violations.model.Violation;
+import com.netcracker.web.violations.model.ViolationOutput;
 import org.springframework.stereotype.Component;
 
 import java.sql.*;
@@ -9,7 +10,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 @Component
-public class ViolationsDAOImpl implements ViolationDAO{
+public class ViolationsDAOImpl implements ViolationDAO {
 
     private static String url = "jdbc:postgresql://localhost:5432/violations";
     private static String username = "postgres";
@@ -36,12 +37,15 @@ public class ViolationsDAOImpl implements ViolationDAO{
     @Override
     public void save(Violation violation) {
         try {
-            Statement statement = connection.createStatement();
-            String SQL = "INSERT INTO Violation (date, status, address, id_fine, id_car) VALUES('" + violation.getDate() +
-                    "'," + violation.getStatus() + ",'" + violation.getAddress() + "'," + violation.getId_fine() +
-                    "," + violation.getId_car() + ")";
+            PreparedStatement preparedStatement = connection.prepareStatement("INSERT INTO Violation (date, status, address, id_fine, id_car) VALUES(?,?,?,?,?)");
 
-            statement.executeUpdate(SQL);
+            preparedStatement.setDate(1, violation.getDate());
+            preparedStatement.setInt(2, violation.getStatus());
+            preparedStatement.setString(3, violation.getAddress());
+            preparedStatement.setInt(4, violation.getId_fine());
+            preparedStatement.setInt(5, violation.getId_car());
+
+            preparedStatement.executeUpdate();
         } catch (SQLException e) {
             e.printStackTrace();
         }
@@ -52,7 +56,7 @@ public class ViolationsDAOImpl implements ViolationDAO{
 
         try {
             PreparedStatement preparedStatement = connection.prepareStatement(
-            "UPDATE Violation SET date =?, status=?, address=?, id_fine=?, id_car=? WHERE id=?");
+                    "UPDATE Violation SET date =?, status=?, address=?, id_fine=?, id_car=? WHERE id=?");
             preparedStatement.setDate(1, violation.getDate());
             preparedStatement.setInt(2, violation.getStatus());
             preparedStatement.setString(3, violation.getAddress());
@@ -76,6 +80,7 @@ public class ViolationsDAOImpl implements ViolationDAO{
             ResultSet resultSet = preparedStatement.executeQuery();
             resultSet.next();
             violation = new Violation();
+            System.out.println(violation.getDate());
 
             violation.setId(resultSet.getInt("id"));
             violation.setDate(resultSet.getDate("date"));
@@ -142,7 +147,7 @@ public class ViolationsDAOImpl implements ViolationDAO{
     }
 
     @Override
-    public ViolationOutput convertToOutput(Violation violation){
+    public ViolationOutput convertToOutput(Violation violation) {
         ViolationOutput output = new ViolationOutput();
         output.setId(violation.getId());
         output.setDate(violation.getDate());
@@ -162,14 +167,14 @@ public class ViolationsDAOImpl implements ViolationDAO{
             resultSet.next();
             output.setFineType(resultSet.getString("type"));
             output.setFineAmount(resultSet.getInt("amount"));
-        }catch (SQLException throwables) {
+        } catch (SQLException throwables) {
             throwables.printStackTrace();
         }
         return output;
     }
 
     @Override
-    public Violation outputToViolation(ViolationOutput output){
+    public Violation outputToViolation(ViolationOutput output) {
         Violation violation = new Violation();
         violation.setId(output.getId());
         violation.setDate(output.getDate());
@@ -179,7 +184,7 @@ public class ViolationsDAOImpl implements ViolationDAO{
         //находим данные из связанных таблиц
         try {
             Statement statement = connection.createStatement();
-            String SQL = "SELECT id FROM Car WHERE number = '" + output.getCarNumber()+ "'";
+            String SQL = "SELECT id FROM Car WHERE number = '" + output.getCarNumber() + "'";
             ResultSet resultSet = statement.executeQuery(SQL);
             resultSet.next();
             violation.setId_car(resultSet.getInt("id"));
@@ -189,9 +194,45 @@ public class ViolationsDAOImpl implements ViolationDAO{
             ResultSet resultSet1 = statement1.executeQuery(SQL);
             resultSet1.next();
             violation.setId_fine(resultSet1.getInt("id"));
-        }catch (SQLException throwables) {
+        } catch (SQLException throwables) {
             throwables.printStackTrace();
         }
         return violation;
+    }
+
+    public List<Violation> searchViolation(Object... arg) {
+        StringBuilder builder = new StringBuilder();
+        List<Violation> violations = new ArrayList<>();
+        for (int i = 0; i < arg.length; i++) {
+            builder.append(arg[i] + " ");
+            System.out.println(builder.toString());
+        }
+
+        try {
+            Statement statement = connection.createStatement();
+            String SQL = "SELECT *  FROM car, violation, fine where violation.id_car = car.id and violation.id_fine = fine.id and to_tsvector( status ||' ' || date ||' ' || number ||' '|| type) @@ plainto_tsquery('" + builder.toString() + "')";
+            ResultSet resultSet = statement.executeQuery(SQL);
+
+            while (resultSet.next()) {
+                Violation violation = new Violation();
+                violation.setId(resultSet.getInt("id"));
+                violation.setDate(resultSet.getDate("date"));
+                violation.setStatus(resultSet.getInt("status"));
+                violation.setAddress(resultSet.getString("address"));
+                violation.setId_car(resultSet.getInt("id_car"));
+                violation.setId_fine(resultSet.getInt("id_fine"));
+                System.out.println(violation.getAddress());
+
+
+                violations.add(violation);
+            }
+
+
+        } catch (SQLException throwables) {
+            throwables.printStackTrace();
+        }
+
+        return violations;
+
     }
 }

@@ -37,9 +37,11 @@ public class FineDAOImpl implements FineDAO {
     public void save(Fine fine) {
         try {
             Statement statement = connection.createStatement();
-            String SQL = "INSERT INTO Fine (type, amount) VALUES('" + fine.getType() +
-                    "'," + fine.getAmount() + ")";
-            statement.executeUpdate(SQL);
+            PreparedStatement preparedStatement = connection.prepareStatement("INSERT INTO Fine (type, amount) VALUES(?,?)");
+
+            preparedStatement.setString(1, fine.getType());
+            preparedStatement.setInt(2, fine.getAmount());
+            preparedStatement.executeUpdate();
         } catch (SQLException e) {
             e.printStackTrace();
         }
