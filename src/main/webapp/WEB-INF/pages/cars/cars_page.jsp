@@ -38,12 +38,29 @@
                     </form>
                     <c:url var="update" value="/cars/${car.id}/edit"/>
                     <form action="${update}">
-                        <input type="submit" value="Редактировать"/>
+                        <input type="submit" value="Редактировать" class="input-button"/>
                     </form>
-                    <c:url var="delete" value="/cars/${car.id}"/>
-                    <form action="${delete}" method="Post">
-                        <input name="_method" type="hidden" value="delete">
-                        <input type="submit" value="Удалить"/>
+                    </form>
+                    <a href="#dark-window" class="input-button">Удалить</a>
+                    <div id="dark-window">
+                        <div id = "popup-window">
+                            <p>Вы точно хотите удалить автомобиль</p>
+                            <p><b>${сar.number}</b>?</p>
+                            <br>
+                            <div class = "flex-container">
+                                <div class="flex-item">
+                                    <c:url var="delete" value="/cars/${car.id}"/>
+                                    <form action="${delete}" method="Post">
+                                        <input name="_method" type="hidden" value="delete"/>
+                                        <input type="submit" value="Да" class="input-button"/>
+                                    </form>
+                                </div>
+                                <div class="flex-item">
+                                    <a href = "#" class="input-button" style="padding-top: -1%">Нет</a>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
                     </form>
                 </div>
                 <p>Владелец</p>

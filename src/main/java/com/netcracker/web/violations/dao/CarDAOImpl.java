@@ -15,9 +15,9 @@ import java.util.List;
 @Component
 public class CarDAOImpl implements CarDAO {
 
-    private static String url = "jdbc:postgresql://localhost:5432/violations";
+    private static String url = "jdbc:postgresql://localhost:5432/Violations";
     private static String username = "postgres";
-    private static String password = "avoeva";
+    private static String password = "Vegetable*1";
     private static Connection connection;
 
     static {
@@ -77,19 +77,10 @@ public class CarDAOImpl implements CarDAO {
         try {
             PreparedStatement preparedStatement =
                     connection.prepareStatement("SELECT * FROM Car WHERE id=?");
-
             preparedStatement.setInt(1, id);
-
             ResultSet resultSet = preparedStatement.executeQuery();
-
             resultSet.next();
-
-            car = new Car();
-
-            car.setId(resultSet.getInt("id"));
-            car.setNumber(resultSet.getString("number"));
-            car.setModel(resultSet.getString("model"));
-            car.setOwner(resultSet.getString("owner"));
+            car = createCar(resultSet);
         } catch (SQLException e) {
             e.printStackTrace();
         }
@@ -122,13 +113,7 @@ public class CarDAOImpl implements CarDAO {
             ResultSet resultSet = statement.executeQuery(SQL);
 //дублирование кода
             while (resultSet.next()) {
-                Car car = new Car();
-
-                car.setId(resultSet.getInt("id"));
-                car.setNumber(resultSet.getString("number"));
-                car.setModel(resultSet.getString("model"));
-                car.setOwner(resultSet.getString("owner"));
-
+                Car car = createCar(resultSet);
                 cars.add(car);
             }
         } catch (SQLException e) {
@@ -137,35 +122,19 @@ public class CarDAOImpl implements CarDAO {
         return cars;
     }
 
-    //перенести в класс нарушений
-    @Override
-    public List<Violation> showViolations(int idCar) {
-        List<Violation> violations = new ArrayList<>();
+
+    Car createCar(ResultSet resultSet){
+        Car car = null;
         try {
-            PreparedStatement preparedStatement =
-                    connection.prepareStatement("SELECT * FROM Violation WHERE id_car=?");
-
-            preparedStatement.setInt(1, idCar);
-
-            ResultSet resultSet = preparedStatement.executeQuery();
-
-            while (resultSet.next()) {
-                Violation violation = new Violation();
-
-                violation.setId(resultSet.getInt("id"));
-                violation.setDate(resultSet.getDate("date"));
-                violation.setStatus(resultSet.getInt("status"));
-                violation.setAddress(resultSet.getString("address"));
-                violation.setId_fine(resultSet.getInt("id_fine"));
-                violation.setId_car(resultSet.getInt("id_car"));
-
-                violations.add(violation);
-            }
-        } catch (SQLException e){
-            e.printStackTrace();
+            car = new Car();
+            car.setId(resultSet.getInt("id"));
+            car.setNumber(resultSet.getString("number"));
+            car.setModel(resultSet.getString("model"));
+            car.setOwner(resultSet.getString("owner"));
+        } catch (SQLException throwables) {
+            throwables.printStackTrace();
         }
-        return violations;
-
+        return car;
     }
 
 }

@@ -37,13 +37,16 @@ public class ViolationsController {
     public ModelAndView allViolations() {
         ModelAndView modelAndView = new ModelAndView();
         modelAndView.setViewName("violations/violations_page");
-        modelAndView.addObject("fines", fineDAO.allFines());
         ArrayList<ViolationOutput> violations = new ArrayList<>();
         for (Violation violation : violationDAO.allViolations()) {
             ViolationOutput violationAdd = violationDAO.convertToOutput(violation);
             violations.add(violationAdd);
         }
         modelAndView.addObject("violations", violations);
+        modelAndView.addObject("cars", carDAO.allCars());
+        modelAndView.addObject("fines", fineDAO.allFines());
+        String[] searchParameters = new String[4];
+        modelAndView.addObject("searchParameters", searchParameters);
         return modelAndView;
     }
 

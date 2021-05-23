@@ -12,9 +12,9 @@ import java.util.List;
 @Component
 public class ViolationsDAOImpl implements ViolationDAO {
 
-    private static String url = "jdbc:postgresql://localhost:5432/violations";
+    private static String url = "jdbc:postgresql://localhost:5432/Violations";
     private static String username = "postgres";
-    private static String password = "avoeva";
+    private static String password = "Vegetable*1";
     private static Connection connection;
 
     static {
@@ -37,9 +37,9 @@ public class ViolationsDAOImpl implements ViolationDAO {
     @Override
     public void save(Violation violation) {
         try {
-            PreparedStatement preparedStatement = connection.prepareStatement("INSERT INTO Violation (date, status, address, id_fine, id_car) VALUES(?,?,?,?,?)");
+            PreparedStatement preparedStatement = connection.prepareStatement("INSERT INTO Violation (date, status, address, id_fine, id_car) VALUES(TO_DATE(?, 'YYYY-MM-DD'),?,?,?,?)");
 
-            preparedStatement.setDate(1, violation.getDate());
+            preparedStatement.setString(1, violation.getDate());
             preparedStatement.setInt(2, violation.getStatus());
             preparedStatement.setString(3, violation.getAddress());
             preparedStatement.setInt(4, violation.getId_fine());
@@ -56,8 +56,8 @@ public class ViolationsDAOImpl implements ViolationDAO {
 
         try {
             PreparedStatement preparedStatement = connection.prepareStatement(
-                    "UPDATE Violation SET date =?, status=?, address=?, id_fine=?, id_car=? WHERE id=?");
-            preparedStatement.setDate(1, violation.getDate());
+                    "UPDATE Violation SET date = TO_DATE(?, 'YYYY-MM-DD'), status=?, address=?, id_fine=?, id_car=? WHERE id=?");
+            preparedStatement.setString(1, violation.getDate());
             preparedStatement.setInt(2, violation.getStatus());
             preparedStatement.setString(3, violation.getAddress());
             preparedStatement.setInt(4, violation.getId_fine());
@@ -79,15 +79,9 @@ public class ViolationsDAOImpl implements ViolationDAO {
             preparedStatement.setInt(1, id);
             ResultSet resultSet = preparedStatement.executeQuery();
             resultSet.next();
-            violation = new Violation();
+            violation = createViolation(resultSet);
             System.out.println(violation.getDate());
 
-            violation.setId(resultSet.getInt("id"));
-            violation.setDate(resultSet.getDate("date"));
-            violation.setAddress(resultSet.getString("address"));
-            violation.setStatus(resultSet.getInt("status"));
-            violation.setId_fine(resultSet.getInt("id_fine"));
-            violation.setId_car(resultSet.getInt("id_car"));
         } catch (SQLException e) {
             e.printStackTrace();
         }
@@ -129,15 +123,7 @@ public class ViolationsDAOImpl implements ViolationDAO {
             ResultSet resultSet = statement.executeQuery(SQL);
 
             while (resultSet.next()) {
-                Violation violation = new Violation();
-                violation.setId(resultSet.getInt("id"));
-                violation.setDate(resultSet.getDate("date"));
-                violation.setStatus(resultSet.getInt("status"));
-                violation.setAddress(resultSet.getString("address"));
-                violation.setId_car(resultSet.getInt("id_car"));
-                violation.setId_fine(resultSet.getInt("id_fine"));
-
-
+                Violation violation = createViolation(resultSet);
                 violations.add(violation);
             }
         } catch (SQLException e) {
@@ -156,14 +142,15 @@ public class ViolationsDAOImpl implements ViolationDAO {
 
         //находим данные из связанных таблиц
         try {
-            Statement statement = connection.createStatement();
-            String SQL = "SELECT number FROM Car WHERE id = " + violation.getId_car();
-            ResultSet resultSet = statement.executeQuery(SQL);
+            PreparedStatement statement = connection.prepareStatement("SELECT number FROM Car WHERE id = ?");
+            statement.setInt(1, violation.getId_car());
+            ResultSet resultSet = statement.executeQuery();
             resultSet.next();
             output.setCarNumber(resultSet.getString("number"));
 
-            SQL = "SELECT type, amount FROM Fine WHERE id = " + violation.getId_fine();
-            resultSet = statement.executeQuery(SQL);
+            statement = connection.prepareStatement("SELECT type, amount FROM Fine WHERE id =?");
+            statement.setInt(1, violation.getId_fine());
+            resultSet = statement.executeQuery();
             resultSet.next();
             output.setFineType(resultSet.getString("type"));
             output.setFineAmount(resultSet.getInt("amount"));
@@ -199,6 +186,35 @@ public class ViolationsDAOImpl implements ViolationDAO {
         }
         return violation;
     }
+    @Override
+    public List<Violation> showViolations(int idCar) {
+        List<Violation> violations = new ArrayList<>();
+        try {
+            PreparedStatement preparedStatement =
+                    connection.prepareStatement("SELECT * FROM Violation WHERE id_car=?");
+
+            preparedStatement.setInt(1, idCar);
+
+            ResultSet resultSet = preparedStatement.executeQuery();
+
+            while (resultSet.next()) {
+                Violation violation = new Violation();
+
+                violation.setId(resultSet.getInt("id"));
+                violation.setDate(resultSet.getDate("date").toString());
+                violation.setStatus(resultSet.getInt("status"));
+                violation.setAddress(resultSet.getString("address"));
+                violation.setId_fine(resultSet.getInt("id_fine"));
+                violation.setId_car(resultSet.getInt("id_car"));
+
+                violations.add(violation);
+            }
+        } catch (SQLException e){
+            e.printStackTrace();
+        }
+        return violations;
+
+    }
 
     public List<Violation> searchViolation(Object... arg) {
         StringBuilder builder = new StringBuilder();
@@ -214,16 +230,7 @@ public class ViolationsDAOImpl implements ViolationDAO {
             ResultSet resultSet = statement.executeQuery(SQL);
 
             while (resultSet.next()) {
-                Violation violation = new Violation();
-                violation.setId(resultSet.getInt("id"));
-                violation.setDate(resultSet.getDate("date"));
-                violation.setStatus(resultSet.getInt("status"));
-                violation.setAddress(resultSet.getString("address"));
-                violation.setId_car(resultSet.getInt("id_car"));
-                violation.setId_fine(resultSet.getInt("id_fine"));
-                System.out.println(violation.getAddress());
-
-
+                Violation violation = createViolation(resultSet);
                 violations.add(violation);
             }
 
@@ -235,4 +242,19 @@ public class ViolationsDAOImpl implements ViolationDAO {
         return violations;
 
     }
+     public Violation createViolation(ResultSet resultSet){
+        Violation violation = new Violation();
+        try {
+            violation.setId(resultSet.getInt("id"));
+            violation.setDate(resultSet.getDate("date").toString());
+            violation.setStatus(resultSet.getInt("status"));
+            violation.setAddress(resultSet.getString("address"));
+            violation.setId_car(resultSet.getInt("id_car"));
+            violation.setId_fine(resultSet.getInt("id_fine"));
+            System.out.println(violation.getAddress());
+        } catch (SQLException throwables) {
+            throwables.printStackTrace();
+        }
+         return violation;
+     }
 }

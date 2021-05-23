@@ -32,8 +32,10 @@
         </div>
         <h3>По виду правонарушения</h3>
         <select name="type">
-            <option>Наезд на пешехода</option>
-            <option>Проезд на красный свет</option>
+            <option value="">...</option>
+            <c:forEach var="fine" items="${fines}">
+                <option value="${fine.type}">${fine.type}</option>
+            </c:forEach>
         </select>
         <h3>По статусу</h3>
         <input type="radio" name="status" value="1">Только оплаченные<br>
@@ -61,10 +63,27 @@
                         <form action="${update}">
                             <input type="submit" value="Редактировать" class="input-button"/>
                         </form>
-                        <c:url var="delete" value="/violations/${violation.id}"/>
-                        <form action="${delete}" method="Post">
-                            <input name="_method" type="hidden" value="delete">
-                            <input type="submit" value="Удалить" class="input-button"/>
+                            <a href="#dark-window" class="input-button">Удалить</a>
+                            <div id="dark-window">
+                                <div id = "popup-window">
+                                    <p>Вы точно хотите удалить штраф</p>
+                                    <p><b>${violation.fineType}</b></p>
+                                    <p>на автомобиль <b>${violation.carNumber}</b>?</p>
+                                    <br>
+                                    <div class = "flex-container">
+                                        <div class="flex-item">
+                                            <c:url var="delete" value="/violations/${violation.id}"/>
+                                            <form action="${delete}" method="Post">
+                                            <input name="_method" type="hidden" value="delete"/>
+                                            <input type="submit" value="Да" class="input-button"/>
+                                            </form>
+                                        </div>
+                                        <div class="flex-item">
+                                            <a href = "#" class="input-button" style="padding-top: -1%">Нет</a>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
                         </form>
                     </div>
                     <p>${violation.fineAmount}</p>

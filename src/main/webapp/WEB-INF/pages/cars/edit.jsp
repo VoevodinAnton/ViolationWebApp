@@ -35,12 +35,12 @@
         <div class="flex-content">
             <p class="item">Номер автомобиля</p>
             <input type="text" name="number" placeholder="A000AA777" value="${car.number}" class="input-field" >
-            <form:errors path="car.number"/>
+            <form:errors path="car.number" cssClass = "ui-state-error"/>
         </div>
         <div class="flex-content">
             <p class="item">Модель</p>
             <input type="text" name="model" placeholder="model" value="${car.model}" class="input-field" >
-            <form:errors path="car.model"/>
+            <form:errors path="car.model" cssClass = "ui-state-error"/>
         </div>
         <div class="flex-content">
             <p class="item">Владелец</p>

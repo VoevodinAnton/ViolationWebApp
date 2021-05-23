@@ -65,7 +65,7 @@ public class CarsController {
         ModelAndView modelAndView = new ModelAndView();
         modelAndView.setViewName("cars/car_violations");
         ArrayList<ViolationOutput> violations = new ArrayList<>();
-        for (Violation violation : carDAO.showViolations(idCar)) {
+        for (Violation violation : violationsDAO.showViolations(idCar)) {
             ViolationOutput violationAdd = violationsDAO.convertToOutput(violation);
             violations.add(violationAdd);
         }

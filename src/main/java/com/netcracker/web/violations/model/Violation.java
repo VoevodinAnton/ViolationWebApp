@@ -8,7 +8,8 @@ public class Violation {
     @NotNull(message = "Поле не может быть пустым")
     private Integer id;
     @NotNull(message = "Поле не может быть пустым")
-    private Date date;
+    @Pattern(regexp = "^\\d{4}-\\d{2}-\\d{2}$", message = "Дата должна быть введена в формате ГГГГ-ММ-ДД")
+    private String date;
     private Integer status;
     @NotBlank(message = "Поле не может быть пустым")
     private String address;
@@ -22,11 +23,11 @@ public class Violation {
         this.id = id;
     }
 
-    public Date getDate() {
+    public String getDate() {
         return date;
     }
 
-    public void setDate(Date date) {
+    public void setDate(String date) {
         this.date = date;
     }
 
