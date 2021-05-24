@@ -36,6 +36,13 @@ body{
     font-size: 20px;
     background-color: #0A0C29;
 }
+.back{
+    margin-left: 5%;
+    margin-top: 2%;
+    color: #0A0C29;
+    font-size: 14px;
+    text-decoration: underline;
+}
 .search{
     margin-left: 5%;
 }

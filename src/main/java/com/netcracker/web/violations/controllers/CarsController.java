@@ -89,7 +89,7 @@ public class CarsController {
         violation.setId_car(idCar);
 
         //TODO: заглушка, убрать когда будет починен чекбокс
-        violation.setStatus(1);
+        //violation.setStatus(1);
         if (bindingResult.hasErrors()) {
             modelAndView.addObject("car", carDAO.get(idCar));
             modelAndView.addObject("fines", fineDAO.allFines());
@@ -116,7 +116,7 @@ public class CarsController {
         ModelAndView modelAndView = new ModelAndView();
         violationUpdated.setId_car(idCar);
         //TODO: заглушка, убрать когда будет починен чекбокс
-        violationUpdated.setStatus(1);
+        //violationUpdated.setStatus(1);
         if (bindingResult.hasErrors()) {
             modelAndView.addObject("violation", violationsDAO.get(idViolation));
             modelAndView.addObject("car", carDAO.get(idCar));

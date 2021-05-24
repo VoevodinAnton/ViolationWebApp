@@ -34,7 +34,7 @@
                     <div class="flex-item">${car.model}</div>
                     <c:url var="carViolations" value="/cars/${car.id}/violations"/>
                     <form action="${carViolations}">
-                        <input type="submit" value="Посмотреть штрафы на этот автомобиль"/>
+                        <input type="submit" value="Посмотреть штрафы на этот автомобиль" class="input-button"/>
                     </form>
                     <c:url var="update" value="/cars/${car.id}/edit"/>
                     <form action="${update}">

@@ -52,8 +52,10 @@
         </div>
         <div class="flex-content">
             <p class="item">Оплачен</p>
-            <input type="checkbox" name="status" value="${violation.status}">
-            <form:errors path="violation.status"/>
+            <form:select path="violation.status">
+                <form:option value="1">Да</form:option>
+                <form:option value="0">Нет</form:option>
+            </form:select>
         </div>
         <input type="submit" value="Зарегистрировать правонарушение" class="input-button">
     </form>

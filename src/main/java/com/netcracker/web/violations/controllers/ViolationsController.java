@@ -78,7 +78,7 @@ public class ViolationsController {
     public ModelAndView update(@ModelAttribute("violation") @Valid Violation violationUpdated, BindingResult bindingResult, @PathVariable("id") int id) {
         ModelAndView modelAndView = new ModelAndView();
         //TODO: заглушка, убрать когда будет починен чекбокс
-        violationUpdated.setStatus(1);
+        //violationUpdated.setStatus(1);
         if (bindingResult.hasErrors()){
             modelAndView.addObject("cars", carDAO.allCars());
             modelAndView.addObject("violation", violationDAO.get(id));
@@ -104,7 +104,14 @@ public class ViolationsController {
         ModelAndView modelAndView = new ModelAndView();
 
         List<Violation> violationList = violationDAO.searchViolation(requestParams.get("number"),requestParams.get("type"), requestParams.get("status"));
-        modelAndView.addObject("violations", violationList);
+
+        ArrayList<ViolationOutput> violations = new ArrayList<>();
+        for (Violation violation : violationList) {
+            ViolationOutput violationAdd = violationDAO.convertToOutput(violation);
+            violations.add(violationAdd);
+        }
+
+        modelAndView.addObject("violations", violations);
 
         modelAndView.setViewName("violations/search_page");
 

@@ -25,14 +25,9 @@
     <div class="search">
         <h3>По номеру автомобиля</h3>
         <input type="search" name="number" class="number">
-        <h3>По дате</h3>
-        <div class="flex-container">
-            <input type="text" class="date">
-            <input type="text" class="date">
-        </div>
         <h3>По виду правонарушения</h3>
         <select name="type">
-            <option value="">...</option>
+            <option value=" ">Выберите тип штрафа</option>
             <c:forEach var="fine" items="${fines}">
                 <option value="${fine.type}">${fine.type}</option>
             </c:forEach>
@@ -41,7 +36,9 @@
         <input type="radio" name="status" value="1">Только оплаченные<br>
         <input type="radio" name="status" value="0">Только неоплаченные<br>
         <input type="radio" name="status" value=" " checked>Любые<br>
-        <input type="submit" value="search">
+        <div class="parent" style="margin-left: 0">
+        <input type="submit" value="Найти" class="input-button" style="width:100%; margin-right: 0">
+        </div>
     </div>
 </form>
 
@@ -57,7 +54,7 @@
                 <div class="flex-container-parent">
                     <div class="flex-container">
                         <div class="flex-item"> ${violation.fineType} </div>
-                        <div class="flex-item"> ${violation.status} </div>
+                        <div class="flex-item">${violation.status == 0? "Нет": "Да"}</div>
                         <div class="flex-item"> ${violation.carNumber} </div>
                         <c:url var="update" value="/violations/${violation.id}/edit"/>
                         <form action="${update}">
