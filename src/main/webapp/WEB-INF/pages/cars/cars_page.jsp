@@ -40,12 +40,11 @@
                     <form action="${update}">
                         <input type="submit" value="Редактировать" class="input-button"/>
                     </form>
-                    </form>
-                    <a href="#dark-window" class="input-button">Удалить</a>
-                    <div id="dark-window">
-                        <div id = "popup-window">
+                    <a href="#delete-car-dialog-${car.id}" class="input-button">Удалить</a>
+                    <div id="delete-car-dialog-${car.id}" class="dark-window">
+                        <div class = "popup-window">
                             <p>Вы точно хотите удалить автомобиль</p>
-                            <p><b>${сar.number}</b>?</p>
+                            <p><b>${car.number}</b>?</p>
                             <br>
                             <div class = "flex-container">
                                 <div class="flex-item">

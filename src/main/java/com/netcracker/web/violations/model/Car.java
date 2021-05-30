@@ -9,7 +9,7 @@ public class Car {
     private Integer id;
 
     @NotBlank(message = "Поле не может быть пустым")
-    @Pattern(regexp = "^[А-ЯЁ\\-\\s]{1}[0-9]{3}(?<!0{3})[А-ЯЁ\\-\\s]{2}[0-9]{3}$", message = "Неправильный номер автомобиля")
+    @Pattern(regexp = "^[А-ЯЁ\\-\\s]{1}[0-9]{3}(?<!0{3})[А-ЯЁ\\-\\s]{2}[0-9]{3}$", message = "Неправильный номер автомобиля. \nЗапишите номер в формате 0ААА00111")
     private String number;
 
     @NotBlank(message = "Поле не может быть пустым")

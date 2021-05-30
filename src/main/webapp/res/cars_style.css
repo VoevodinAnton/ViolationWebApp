@@ -3,7 +3,7 @@
 body{
     font-family: 'Open Sans', sans-serif;
 }
-#popup-window{
+.popup-window{
     width: 500px;
     height: 150px;
     padding: 1%;
@@ -17,11 +17,11 @@ body{
     left: 0;
     margin: auto;
 }
-#dark-window:target{
+.dark-window:target{
     display: block;
 }
 
-#dark-window{
+.dark-window{
     background: rgba(102, 102, 102, 0.5);
     width: 100%;
     height: 100%;

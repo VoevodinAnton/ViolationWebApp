@@ -36,8 +36,8 @@
         <input type="radio" name="status" value="1">Только оплаченные<br>
         <input type="radio" name="status" value="0">Только неоплаченные<br>
         <input type="radio" name="status" value=" " checked>Любые<br>
-        <div class="parent" style="margin-left: 0">
-        <input type="submit" value="Найти" class="input-button" style="width:100%; margin-right: 0">
+        <div class="parent" style="margin-left: 0; width: 95%">
+            <input type="submit" value="Найти" class="input-button" style="width:100%; border-radius: 10px">
         </div>
     </div>
 </form>
@@ -60,9 +60,9 @@
                         <form action="${update}">
                             <input type="submit" value="Редактировать" class="input-button"/>
                         </form>
-                            <a href="#dark-window" class="input-button">Удалить</a>
-                            <div id="dark-window">
-                                <div id = "popup-window">
+                            <a href="#delete-violation-dialog-${violation.id}" class="input-button">Удалить</a>
+                            <div id="delete-violation-dialog-${violation.id}" class="dark-window">
+                                <div class = "popup-window">
                                     <p>Вы точно хотите удалить штраф</p>
                                     <p><b>${violation.fineType}</b></p>
                                     <p>на автомобиль <b>${violation.carNumber}</b>?</p>
