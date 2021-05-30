@@ -61,11 +61,27 @@
                         <form action="${update}">
                             <input type="submit" value="Редактировать"/>
                         </form>
-                        <c:url var="delete" value="/cars/${car.id}/violations/${violation.id}"/>
-                        <form action="${delete}" method="Post">
-                            <input name="_method" type="hidden" value="delete">
-                            <input type="submit" value="Удалить"/>
-                        </form>
+                        <a href="#delete-violation-dialog-${violation.id}" class="input-button">Удалить</a>
+                        <div id="delete-violation-dialog-${violation.id}" class="dark-window">
+                            <div class = "popup-window">
+                                <p>Вы точно хотите удалить штраф</p>
+                                <p><b>${violation.fineType}</b></p>
+                                <p>на автомобиль <b>${violation.carNumber}</b>?</p>
+                                <br>
+                                <div class = "flex-container">
+                                    <div class="flex-item">
+                                        <c:url var="delete" value="/violations/${violation.id}"/>
+                                        <form action="${delete}" method="Post">
+                                            <input name="_method" type="hidden" value="delete"/>
+                                            <input type="submit" value="Да" class="input-button"/>
+                                        </form>
+                                    </div>
+                                    <div class="flex-item">
+                                        <a href = "#" class="input-button" style="padding-top: -1%">Нет</a>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
                     </div>
                 </div>
                 <div class="component">${violation.date}</div>

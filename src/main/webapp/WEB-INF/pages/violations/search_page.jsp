@@ -42,9 +42,9 @@
                         <form action="${update}">
                             <input type="submit" value="Редактировать" class="input-button"/>
                         </form>
-                        <a href="#dark-window" class="input-button">Удалить</a>
-                        <div id="dark-window">
-                            <div id = "popup-window">
+                        <a href="#delete-violation-dialog-${violation.id}" class="input-button">Удалить</a>
+                        <div id="delete-violation-dialog-${violation.id}" class="dark-window">
+                            <div class = "popup-window">
                                 <p>Вы точно хотите удалить штраф</p>
                                 <p><b>${violation.fineType}</b></p>
                                 <p>на автомобиль <b>${violation.carNumber}</b>?</p>
@@ -63,7 +63,6 @@
                                 </div>
                             </div>
                         </div>
-                        </form>
                     </div>
                     <p>${violation.fineAmount}</p>
                     <p>${violation.address}</p>
