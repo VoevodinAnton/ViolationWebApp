@@ -4,6 +4,11 @@ import javax.validation.constraints.NotBlank;
 import javax.validation.constraints.NotNull;
 import javax.validation.constraints.Pattern;
 
+import javax.xml.bind.annotation.XmlRootElement;
+import javax.xml.bind.annotation.XmlType;
+
+@XmlRootElement(name = "car")
+@XmlType(propOrder = {"id", "number", "model", "owner"})
 public class Car {
     @NotNull
     private Integer id;

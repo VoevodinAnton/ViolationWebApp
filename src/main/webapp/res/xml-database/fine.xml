@@ -1,0 +1,8 @@
+<?xml version="1.0" ?>
+<fines>
+    <fine>
+        <id>1</id>
+        <type>Проезд на красный</type>
+        <amount>2000</amount>
+    </fine>
+</fines>
