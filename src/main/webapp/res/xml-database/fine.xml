@@ -5,4 +5,9 @@
         <type>Проезд на красный</type>
         <amount>2000</amount>
     </fine>
+    <fine>
+        <id>2</id>
+        <type>Проезд на красный</type>
+        <amount>1500</amount>
+    </fine>
 </fines>

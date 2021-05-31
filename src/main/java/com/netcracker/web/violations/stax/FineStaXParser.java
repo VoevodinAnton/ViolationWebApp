@@ -1,6 +1,7 @@
 package com.netcracker.web.violations.stax;
 
 import com.netcracker.web.violations.model.Car;
+import com.netcracker.web.violations.model.Fine;
 
 import javax.xml.stream.XMLEventReader;
 import javax.xml.stream.XMLInputFactory;
@@ -14,60 +15,53 @@ import java.io.InputStream;
 import java.util.ArrayList;
 import java.util.List;
 
-public class CarStaXParser {
-    static final String CAR = "car";
+public class FineStaXParser {
+    static final String FINE = "fine";
     static final String ID = "id";
-    static final String NUMBER = "number";
-    static final String MODEL = "model";
-    static final String OWNER = "owner";
+    static final String TYPE = "type";
+    static final String AMOUNT = "amount";
 
     @SuppressWarnings({"unchecked", "null"})
-    public List<Car> readXMLFile(String fileName){
-        List<Car> cars = new ArrayList<>();
+    public List<Fine> readXMLFile(String fileName){
+        List<Fine> fines = new ArrayList<>();
         try{
             XMLInputFactory inputFactory = XMLInputFactory.newInstance();
             InputStream inputStream = new FileInputStream(fileName);
             XMLEventReader eventReader = inputFactory.createXMLEventReader(inputStream);
 
-            Car car = null;
+            Fine fine = null;
             while(eventReader.hasNext()) {
                 XMLEvent event = eventReader.nextEvent();
                 if (event.isStartElement()) {
                     StartElement startElement = event.asStartElement();
-                    if (startElement.getName().getLocalPart().equals(CAR)) {
-                        car = new Car();
-
+                    if (startElement.getName().getLocalPart().equals(FINE)) {
+                        fine = new Fine();
                     }
                     if (event.asStartElement().getName().getLocalPart().equals(ID)) {
                         event = eventReader.nextEvent();
-                        car.setId(Integer.parseInt(event.asCharacters().getData()));
+                        fine.setId(Integer.parseInt(event.asCharacters().getData()));
                         continue;
                     }
-                    if (event.asStartElement().getName().getLocalPart().equals(NUMBER)) {
+                    if (event.asStartElement().getName().getLocalPart().equals(TYPE)) {
                         event = eventReader.nextEvent();
-                        car.setNumber(event.asCharacters().getData());
+                        fine.setType(event.asCharacters().getData());
                         continue;
                     }
-                    if (event.asStartElement().getName().getLocalPart().equals(MODEL)) {
+                    if (event.asStartElement().getName().getLocalPart().equals(AMOUNT)) {
                         event = eventReader.nextEvent();
-                        car.setModel(event.asCharacters().getData());
-                        continue;
-                    }
-                    if (event.asStartElement().getName().getLocalPart().equals(OWNER)) {
-                        event = eventReader.nextEvent();
-                        car.setOwner(event.asCharacters().getData());
+                        fine.setAmount(Integer.parseInt(event.asCharacters().getData()));
                         continue;
                     }
                 }
                 if(event.isEndElement()){
                     EndElement endElement = event.asEndElement();
-                    if(endElement.getName().getLocalPart().equals(CAR))
-                        cars.add(car);
+                    if(endElement.getName().getLocalPart().equals(FINE))
+                        fines.add(fine);
                 }
             }
         } catch (FileNotFoundException | XMLStreamException e) {
             e.printStackTrace();
         }
-        return cars;
+        return fines;
     }
 }
