@@ -7,13 +7,18 @@ import com.netcracker.web.violations.stax.CarStaXParser;
 import com.netcracker.web.violations.stax.FineStaXParser;
 import com.netcracker.web.violations.stax.ViolationStaXParser;
 
+import javax.xml.parsers.DocumentBuilder;
+import javax.xml.transform.*;
+import javax.xml.transform.stream.StreamResult;
+import javax.xml.transform.stream.StreamSource;
+import java.io.File;
 import java.util.List;
 
 //только для проверки парсера, нужно будет удалить потом
 public class TestMain {
     public static void main(String[] args) {
-        CarStaXParser read = new CarStaXParser();
-        List<Car> cars = read.readXMLFile("D://ViolationWebApp//src//main//webapp//res//xml-database//cars.xml");
+        /*CarStaXParser read = new CarStaXParser();
+        List<Car> cars = read.readXMLFile("D://ViolationWebApp//src//main//webapp//res//xml-database//database.xml");
         for(Car car: cars){
             System.out.println("Автомобиль");
             System.out.println("id " + car.getId());
@@ -23,7 +28,7 @@ public class TestMain {
         }
 
         FineStaXParser readFine = new FineStaXParser();
-        List<Fine> fines = readFine.readXMLFile("D://ViolationWebApp//src//main//webapp//res//xml-database//fine.xml");
+        List<Fine> fines = readFine.readXMLFile("D://ViolationWebApp//src//main//webapp//res//xml-database//database.xml");
         for(Fine fine: fines){
             System.out.println("Штраф");
             System.out.println("id " + fine.getId());
@@ -32,7 +37,7 @@ public class TestMain {
         }
 
         ViolationStaXParser readViolation = new ViolationStaXParser();
-        List<Violation> violations = readViolation.readXMLFile("D://ViolationWebApp//src//main//webapp//res//xml-database//violations.xml");
+        List<Violation> violations = readViolation.readXMLFile("D://ViolationWebApp//src//main//webapp//res//xml-database//database.xml");
         for(Violation violation: violations){
             System.out.println("Правонарушение");
             System.out.println("id " + violation.getId());
@@ -41,6 +46,17 @@ public class TestMain {
             System.out.println("Адрес  " + violation.getAddress());
             System.out.println("Дата  " + violation.getDate());
             System.out.println("Статус  " + violation.getStatus());
+        }*/
+        try {
+            TransformerFactory factory = TransformerFactory.newInstance();
+            Source xslt = new StreamSource(new File("D://ViolationWebApp//src//main//webapp//res//xml-database//database.xslt"));
+            Transformer transformer = factory.newTransformer(xslt);
+            Source xml = new StreamSource(new File("D://ViolationWebApp//src//main//webapp//res//xml-database//database.xml"));
+            transformer.transform(xml, new StreamResult(new File("D://ViolationWebApp//src//main//webapp//res//xml-database//output.html")));
+        } catch (TransformerConfigurationException e) {
+            e.printStackTrace();
+        } catch (TransformerException e) {
+            e.printStackTrace();
         }
     }
 }
