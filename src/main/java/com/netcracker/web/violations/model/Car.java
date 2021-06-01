@@ -4,13 +4,14 @@ import javax.validation.constraints.NotBlank;
 import javax.validation.constraints.NotNull;
 import javax.validation.constraints.Pattern;
 
+import javax.xml.bind.annotation.XmlAttribute;
+import javax.xml.bind.annotation.XmlElement;
 import javax.xml.bind.annotation.XmlRootElement;
 import javax.xml.bind.annotation.XmlType;
 
 @XmlRootElement(name = "car")
 @XmlType(propOrder = {"id", "number", "model", "owner"})
 public class Car {
-    @NotNull
     private Integer id;
 
     @NotBlank(message = "Поле не может быть пустым")
@@ -42,6 +43,7 @@ public class Car {
         return id;
     }
 
+    @XmlAttribute
     public void setId(Integer id) {
         this.id = id;
     }
@@ -50,6 +52,7 @@ public class Car {
         return number;
     }
 
+    @XmlElement(name = "number")
     public void setNumber(String number) {
         this.number = number;
     }
@@ -58,6 +61,7 @@ public class Car {
         return model;
     }
 
+    @XmlElement(name = "model")
     public void setModel(String model) {
         this.model = model;
     }
@@ -66,6 +70,7 @@ public class Car {
         return owner;
     }
 
+    @XmlElement(name = "owner")
     public void setOwner(String owner) {
         this.owner = owner;
     }

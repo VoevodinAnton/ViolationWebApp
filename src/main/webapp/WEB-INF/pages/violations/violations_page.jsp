@@ -54,7 +54,7 @@
                 <div class="flex-container-parent">
                     <div class="flex-container">
                         <div class="flex-item"> ${violation.fineType} </div>
-                        <div class="flex-item">${violation.status == 0? "Нет": "Да"}</div>
+                        <div class="flex-item">${violation.status == 0? "Не оплачен": "Оплачен"}</div>
                         <div class="flex-item"> ${violation.carNumber} </div>
                         <c:url var="update" value="/violations/${violation.id}/edit"/>
                         <form action="${update}">
