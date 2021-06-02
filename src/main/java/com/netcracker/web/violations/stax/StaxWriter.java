@@ -32,7 +32,7 @@ public class StaxWriter {
 
         try{
             XMLOutputFactory outputFactory = XMLOutputFactory.newInstance();
-            XMLStreamWriter writer = outputFactory.createXMLStreamWriter(new FileWriter("src/main/webapp/res/xml-database/database1.xml"));
+            XMLStreamWriter writer = outputFactory.createXMLStreamWriter(new FileWriter("src/main/webapp/res/xml-database/database.xml"));
 
             writer.writeStartDocument("1.0");
             writer.writeStartElement("database");
