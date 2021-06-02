@@ -153,7 +153,7 @@ public class CarDAOImpl implements CarDAO {
                     preparedStatement.executeUpdate();
                 }
                 else{
-                    preparedStatement = connection.prepareStatement("INSERT INTO Car VALUES(?, ?, ?, ?");
+                    preparedStatement = connection.prepareStatement("INSERT INTO Car VALUES(?, ?, ?, ?)");
                     preparedStatement.setInt(1, car.getId());
                     preparedStatement.setString(2, car.getNumber());
                     preparedStatement.setString(3, car.getModel());
