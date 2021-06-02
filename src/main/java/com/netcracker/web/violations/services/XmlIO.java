@@ -62,14 +62,16 @@ public class XmlIO implements XmlExportImport {
     public File exportToFileViolation(Violation violation) {
         try{
             Car car = carDAO.get(violation.getId_car());
+            System.out.println("Ответ: " + car.getOwner());
             Fine fine = fineDAO.get(violation.getId_fine());
             File file = File.createTempFile("importViolation", ".xml", new File("C:\\Users\\Антон\\IdeaProjects\\ViolationsWebApp\\src\\main\\resources"));
-            JAXBContext context = JAXBContext.newInstance(Violation.class, Fine.class, Car.class);
+            JAXBContext context = JAXBContext.newInstance(Fine.class, Violation.class, Car.class);
             Marshaller m = context.createMarshaller();
             m.setProperty(Marshaller.JAXB_FORMATTED_OUTPUT, Boolean.TRUE);
             m.marshal(violation, file);
-            m.marshal(car, file);
             m.marshal(fine, file);
+            m.marshal(car, file);
+
             return file;
         } catch (JAXBException | IOException e){
             e.printStackTrace();

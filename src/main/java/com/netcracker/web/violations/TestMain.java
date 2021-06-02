@@ -1,8 +1,12 @@
 package com.netcracker.web.violations;
 
+import com.netcracker.web.violations.dao.CarDAOImpl;
+import com.netcracker.web.violations.dao.FineDAOImpl;
+import com.netcracker.web.violations.dao.ViolationsDAOImpl;
 import com.netcracker.web.violations.model.Car;
 import com.netcracker.web.violations.model.Fine;
 import com.netcracker.web.violations.model.Violation;
+import com.netcracker.web.violations.services.XmlIO;
 import com.netcracker.web.violations.stax.CarStaXParser;
 import com.netcracker.web.violations.stax.FineStaXParser;
 import com.netcracker.web.violations.stax.ViolationStaXParser;
@@ -47,6 +51,7 @@ public class TestMain {
             System.out.println("Дата  " + violation.getDate());
             System.out.println("Статус  " + violation.getStatus());
         }*/
+        /*
         try {
             TransformerFactory factory = TransformerFactory.newInstance();
             Source xslt = new StreamSource(new File("D://ViolationWebApp//src//main//webapp//res//xml-database//database.xslt"));
@@ -58,5 +63,14 @@ public class TestMain {
         } catch (TransformerException e) {
             e.printStackTrace();
         }
+
+         */
+
+        CarDAOImpl carDAO = new CarDAOImpl();
+        FineDAOImpl fineDAO = new FineDAOImpl();
+        ViolationsDAOImpl violationsDAO = new ViolationsDAOImpl();
+        XmlIO xmlIO = new XmlIO(carDAO, fineDAO);
+        Violation violation = violationsDAO.get(12);
+        xmlIO.exportToFileViolation(violation);
     }
 }
