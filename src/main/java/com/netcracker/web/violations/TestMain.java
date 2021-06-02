@@ -9,6 +9,7 @@ import com.netcracker.web.violations.model.Violation;
 import com.netcracker.web.violations.services.XmlIO;
 import com.netcracker.web.violations.stax.CarStaXParser;
 import com.netcracker.web.violations.stax.FineStaXParser;
+import com.netcracker.web.violations.stax.StaxWriter;
 import com.netcracker.web.violations.stax.ViolationStaXParser;
 
 import javax.xml.parsers.DocumentBuilder;
@@ -69,8 +70,7 @@ public class TestMain {
         CarDAOImpl carDAO = new CarDAOImpl();
         FineDAOImpl fineDAO = new FineDAOImpl();
         ViolationsDAOImpl violationsDAO = new ViolationsDAOImpl();
-        XmlIO xmlIO = new XmlIO(carDAO, fineDAO);
-        Violation violation = violationsDAO.get(12);
-        xmlIO.exportToFileViolation(violation);
+        StaxWriter staxWriter = new StaxWriter(carDAO, violationsDAO, fineDAO);
+        staxWriter.staxWriter();
     }
 }
