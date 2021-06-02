@@ -115,8 +115,6 @@ public class CarsController {
     public ModelAndView updateViolation(@ModelAttribute("violation") @Valid Violation violationUpdated, BindingResult bindingResult, @PathVariable("idViolation") int idViolation, @PathVariable("id") int idCar) {
         ModelAndView modelAndView = new ModelAndView();
         violationUpdated.setId_car(idCar);
-        //TODO: заглушка, убрать когда будет починен чекбокс
-        //violationUpdated.setStatus(1);
         if (bindingResult.hasErrors()) {
             modelAndView.addObject("violation", violationsDAO.get(idViolation));
             modelAndView.addObject("car", carDAO.get(idCar));

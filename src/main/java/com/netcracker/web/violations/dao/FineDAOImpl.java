@@ -11,9 +11,9 @@ import java.util.List;
 @Component
 public class FineDAOImpl implements FineDAO {
 
-    private static String url = "jdbc:postgresql://localhost:5432/violations";
+    private static String url = "jdbc:postgresql://localhost:5432/Violations";
     private static String username = "postgres";
-    private static String password = "avoeva";
+    private static String password = "Vegetable*1";
     private static Connection connection;
 
     {
@@ -103,5 +103,33 @@ public class FineDAOImpl implements FineDAO {
             e.printStackTrace();
         }
         return fines;
+    }
+
+    @Override
+    public void importFromFile(List<Fine> fines) {
+        PreparedStatement preparedStatement = null;
+        try {
+            for(Fine fine: fines) {
+                preparedStatement = connection.prepareStatement("SELECT * FROM Fine WHERE id=?");
+                preparedStatement.setInt(1, fine.getId());
+                ResultSet resultSet = preparedStatement.executeQuery();
+                if(resultSet.next()) {
+                    preparedStatement = connection.prepareStatement("UPDATE Fine SET type = ?, amount = ? WHERE id = ?");
+                    preparedStatement.setString(1, fine.getType());
+                    preparedStatement.setInt(2, fine.getAmount());
+                    preparedStatement.setInt(3, fine.getId());
+                    preparedStatement.executeUpdate();
+                }
+                else{
+                    preparedStatement = connection.prepareStatement("INSERT INTO Fine VALUES(?, ?, ?)");
+                    preparedStatement.setInt(1, fine.getId());
+                    preparedStatement.setString(2, fine.getType());
+                    preparedStatement.setInt(3, fine.getAmount());
+                    preparedStatement.executeUpdate();
+                }
+            }
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
     }
 }

@@ -15,9 +15,9 @@ import java.util.List;
 @Component
 public class CarDAOImpl implements CarDAO {
 
-    private static String url = "jdbc:postgresql://localhost:5432/violations";
+    private static String url = "jdbc:postgresql://localhost:5432/Violations";
     private static String username = "postgres";
-    private static String password = "avoeva";
+    private static String password = "Vegetable*1";
     private static Connection connection;
 
     {
@@ -111,7 +111,6 @@ public class CarDAOImpl implements CarDAO {
             Statement statement = connection.createStatement();
             String SQL = "SELECT * FROM Car";
             ResultSet resultSet = statement.executeQuery(SQL);
-//дублирование кода
             while (resultSet.next()) {
                 Car car = createCar(resultSet);
                 cars.add(car);
@@ -135,6 +134,36 @@ public class CarDAOImpl implements CarDAO {
             throwables.printStackTrace();
         }
         return car;
+    }
+
+    @Override
+    public void importFromFile(List<Car> cars){
+        PreparedStatement preparedStatement = null;
+        try {
+            for(Car car: cars) {
+                preparedStatement = connection.prepareStatement("SELECT * FROM Car WHERE id=?");
+                preparedStatement.setInt(1, car.getId());
+                ResultSet resultSet = preparedStatement.executeQuery();
+                if(resultSet.next()) {
+                    preparedStatement = connection.prepareStatement("UPDATE Car SET number = ?, model = ?, owner = ? WHERE id = ?");
+                    preparedStatement.setString(1, car.getNumber());
+                    preparedStatement.setString(2, car.getModel());
+                    preparedStatement.setString(3, car.getOwner());
+                    preparedStatement.setInt(4, car.getId());
+                    preparedStatement.executeUpdate();
+                }
+                else{
+                    preparedStatement = connection.prepareStatement("INSERT INTO Car VALUES(?, ?, ?, ?");
+                    preparedStatement.setInt(1, car.getId());
+                    preparedStatement.setString(2, car.getNumber());
+                    preparedStatement.setString(3, car.getModel());
+                    preparedStatement.setString(4, car.getOwner());
+                    preparedStatement.executeUpdate();
+                }
+            }
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
     }
 
 }

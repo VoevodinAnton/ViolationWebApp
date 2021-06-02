@@ -14,9 +14,9 @@ import java.io.InputStream;
 import java.util.ArrayList;
 import java.util.List;
 
-public class CarStaXParser {
+public class CarStaXParser{
     static final String CAR = "car";
-    static final String ID = "id";
+    static final String ID = "idc";
     static final String NUMBER = "number";
     static final String MODEL = "model";
     static final String OWNER = "owner";

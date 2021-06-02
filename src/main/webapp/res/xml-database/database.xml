@@ -1,9 +1,8 @@
-<?xml version="1.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
-        xsi:noNamespaceSchemaLocation="database.xsd" ?>
+<?xml version="1.0"?>
 <database>
     <cars>
         <car>
-            <id>1</id>
+            <idc>1</idc>
             <number>Н645НН876</number>
             <model>Lada Priora</model>
             <owner>Раздувайко Иван Анатольевич</owner>
@@ -11,19 +10,19 @@
     </cars>
     <fines>
         <fine>
-            <id>1</id>
+            <idf>1</idf>
             <type>Проезд на красный</type>
             <amount>2000</amount>
         </fine>
         <fine>
-            <id>2</id>
+            <idf>2</idf>
             <type>Проезд на красный</type>
             <amount>1500</amount>
         </fine>
     </fines>
     <violations>
         <violation>
-            <id>1</id>
+            <idv>1</idv>
             <id_fine>1</id_fine>
             <id_car>1</id_car>
             <address>Московское шоссе, 34б</address>
@@ -31,7 +30,7 @@
             <status>0</status>
         </violation>
         <violation>
-            <id>2</id>
+            <idv>2</idv>
             <id_fine>2</id_fine>
             <id_car>1</id_car>
             <address>Ташкентская, 65</address>

@@ -11,5 +11,5 @@ public interface XmlExportImport {
     File exportToFileCar(Car car);
     File exportToFileFine(Fine fine);
     File exportToFileViolation(Violation violation);
-    Object importFromFile(File file);
+    void importFromFile(String fileName);
 }

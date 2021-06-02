@@ -1,6 +1,7 @@
 package com.netcracker.web.violations.dao;
 
 import com.netcracker.web.violations.model.Car;
+import com.netcracker.web.violations.model.Fine;
 import com.netcracker.web.violations.model.Violation;
 import com.netcracker.web.violations.model.ViolationOutput;
 import org.springframework.stereotype.Component;
@@ -12,9 +13,9 @@ import java.util.List;
 @Component
 public class ViolationsDAOImpl implements ViolationDAO {
 
-    private static String url = "jdbc:postgresql://localhost:5432/violations";
+    private static String url = "jdbc:postgresql://localhost:5432/Violations";
     private static String username = "postgres";
-    private static String password = "avoeva";
+    private static String password = "Vegetable*1";
     private static Connection connection;
 
      {
@@ -186,6 +187,43 @@ public class ViolationsDAOImpl implements ViolationDAO {
         }
         return violation;
     }
+
+    @Override
+    public void importFromFile(List<Violation> violations) {
+        PreparedStatement preparedStatement = null;
+        try {
+            for(Violation violation: violations) {
+                preparedStatement = connection.prepareStatement("SELECT * FROM Violation WHERE id=?");
+                preparedStatement.setInt(1, violation.getId());
+                ResultSet resultSet = preparedStatement.executeQuery();
+                if(resultSet.next()) {
+                    preparedStatement = connection.prepareStatement(
+                            "UPDATE Violation SET date = TO_DATE(?, 'YYYY-MM-DD'), status=?, address=?, id_fine=?, id_car=? WHERE id=?");
+                    preparedStatement.setString(1, violation.getDate());
+                    preparedStatement.setInt(2, violation.getStatus());
+                    preparedStatement.setString(3, violation.getAddress());
+                    preparedStatement.setInt(4, violation.getId_fine());
+                    preparedStatement.setInt(5, violation.getId_car());
+                    preparedStatement.setInt(6, violation.getId());
+                    preparedStatement.executeUpdate();
+                }
+                else{
+                    preparedStatement = connection.prepareStatement("INSERT INTO Violation VALUES(?,TO_DATE(?, 'YYYY-MM-DD'),?,?,?,?)");
+
+                    preparedStatement.setInt(1, violation.getId());
+                    preparedStatement.setString(2, violation.getDate());
+                    preparedStatement.setInt(3, violation.getStatus());
+                    preparedStatement.setString(4, violation.getAddress());
+                    preparedStatement.setInt(5, violation.getId_fine());
+                    preparedStatement.setInt(6, violation.getId_car());
+                    preparedStatement.executeUpdate();
+                }
+            }
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+    }
+
     @Override
     public List<Violation> showViolations(int idCar) {
         List<Violation> violations = new ArrayList<>();

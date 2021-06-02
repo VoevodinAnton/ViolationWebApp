@@ -27,4 +27,6 @@ public interface ViolationDAO {
     List<Violation> showViolations(int id_car);
 
     Violation outputToViolation(ViolationOutput output);
+
+    void importFromFile(List<Violation> violations);
 }

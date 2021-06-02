@@ -52,8 +52,7 @@ public class TestMain {
             System.out.println("Дата  " + violation.getDate());
             System.out.println("Статус  " + violation.getStatus());
         }*/
-        /*
-        try {
+       /* try {
             TransformerFactory factory = TransformerFactory.newInstance();
             Source xslt = new StreamSource(new File("D://ViolationWebApp//src//main//webapp//res//xml-database//database.xslt"));
             Transformer transformer = factory.newTransformer(xslt);
@@ -63,14 +62,17 @@ public class TestMain {
             e.printStackTrace();
         } catch (TransformerException e) {
             e.printStackTrace();
-        }
+        }*/
 
-         */
+
 
         CarDAOImpl carDAO = new CarDAOImpl();
         FineDAOImpl fineDAO = new FineDAOImpl();
         ViolationsDAOImpl violationsDAO = new ViolationsDAOImpl();
-        StaxWriter staxWriter = new StaxWriter(carDAO, violationsDAO, fineDAO);
-        staxWriter.staxWriter();
+        /*StaxWriter staxWriter = new StaxWriter(carDAO, violationsDAO, fineDAO);
+        staxWriter.staxWriter();*/
+
+        XmlIO xmlIO = new XmlIO(carDAO, fineDAO, violationsDAO);
+        xmlIO.importFromFile("src/main/webapp/res/xml-database/database.xml");
     }
 }

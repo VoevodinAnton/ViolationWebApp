@@ -18,7 +18,7 @@ import java.util.List;
 
 public class ViolationStaXParser {
     static final String VIOLATION = "violation";
-    static final String ID = "id";
+    static final String ID = "idv";
     static final String ID_FINE = "id_fine";
     static final String ID_CAR = "id_car";
     static final String DATE = "date";

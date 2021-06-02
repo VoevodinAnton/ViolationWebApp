@@ -14,4 +14,6 @@ public interface FineDAO {
     void delete(int id);
 
     List<Fine> allFines();
+
+    void importFromFile(List<Fine> fines);
 }

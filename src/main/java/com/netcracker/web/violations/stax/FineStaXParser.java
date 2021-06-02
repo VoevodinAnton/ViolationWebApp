@@ -17,7 +17,7 @@ import java.util.List;
 
 public class FineStaXParser {
     static final String FINE = "fine";
-    static final String ID = "id";
+    static final String ID = "idf";
     static final String TYPE = "type";
     static final String AMOUNT = "amount";
 
