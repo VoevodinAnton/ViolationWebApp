@@ -41,7 +41,7 @@ public class StaxWriter {
             for (Car car : cars) {
                 writer.writeStartElement("car");
 
-                writer.writeStartElement("id");
+                writer.writeStartElement("idc");
                 writer.writeCharacters(String.valueOf(car.getId()));
                 writer.writeEndElement();
 
@@ -67,7 +67,7 @@ public class StaxWriter {
             for (Violation violation : violations) {
                 writer.writeStartElement("violation");
 
-                writer.writeStartElement("id");
+                writer.writeStartElement("idv");
                 writer.writeCharacters(String.valueOf(violation.getId()));
                 writer.writeEndElement();
 
@@ -101,7 +101,7 @@ public class StaxWriter {
             for (Fine fine : fines) {
                 writer.writeStartElement("fine");
 
-                writer.writeStartElement("id");
+                writer.writeStartElement("idf");
                 writer.writeCharacters(String.valueOf(fine.getId()));
                 writer.writeEndElement();
 
