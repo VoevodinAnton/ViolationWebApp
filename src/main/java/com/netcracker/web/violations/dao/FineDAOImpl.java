@@ -105,6 +105,20 @@ public class FineDAOImpl implements FineDAO {
         return fines;
     }
 
+    public boolean checkUnique(Fine fine){
+        PreparedStatement preparedStatement = null;
+        boolean result = false;
+        try {
+            preparedStatement = connection.prepareStatement("SELECT * FROM Fine WHERE type=?");
+            preparedStatement.setString(1, fine.getType());
+            ResultSet resultSet = preparedStatement.executeQuery();
+            if(!resultSet.next())
+                result = true;
+        } catch (SQLException throwables) {
+            throwables.printStackTrace();
+        }
+        return result;
+    }
     @Override
     public void importFromFile(List<Fine> fines) {
         PreparedStatement preparedStatement = null;

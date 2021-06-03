@@ -54,7 +54,7 @@
             <td>
                 <div class="component">
                     <div class="flex-container">
-                        <div class="flex-item">${violation.fineType}</div>
+                        <div class="flex-item" style="width: 250px"><b>${violation.fineType}</b></div>
                         <div class="flex-item">${violation.fineAmount}</div>
                         <div class="flex-item">${violation.status == 0? "Нет": "Да"}</div>
                         <c:url var="update" value="/cars/${car.id}/violations/${violation.id}/edit"/>
@@ -77,7 +77,9 @@
                                         </form>
                                     </div>
                                     <div class="flex-item">
-                                        <a href = "#" class="input-button" style="padding-top: -1%">Нет</a>
+                                        <form action="#">
+                                            <input type="submit" value="Нет" class="input-button"/>
+                                        </form>
                                     </div>
                                 </div>
                             </div>

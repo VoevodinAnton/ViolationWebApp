@@ -19,7 +19,12 @@
 <div class="cap">
     <h1>Портал учета нарушений ПДД</h1>
 </div>
-<h2 class="main-title">Поиск штрафов</h2>
+<div class="flex-container">
+    <h2 class="main-title" style="margin-right: 80%">Поиск штрафов</h2>
+    <form action="#" style="margin-top: 1%">
+        <input type="submit" value="Импорт из файла" class="input-button"/>
+    </form>
+</div>
 <c:url value="/violations/search" var="search"/>
 <form action="${search}" method="GET">
     <div class="search">
@@ -37,7 +42,7 @@
         <input type="radio" name="status" value="0">Только неоплаченные<br>
         <input type="radio" name="status" value=" " checked>Любые<br>
         <div class="parent" style="margin-left: 0; width: 95%">
-            <input type="submit" value="Найти" class="input-button" style="width:100%; border-radius: 10px">
+            <input type="submit" value="Найти" class="input-button" style="width:100%; border-radius: 10px;background-color: #19196c">
         </div>
     </div>
 </form>
@@ -53,7 +58,7 @@
             <td>
                 <div class="flex-container-parent">
                     <div class="flex-container">
-                        <div class="flex-item"> ${violation.fineType} </div>
+                        <div class="flex-item" style="width: 250px"><b>${violation.fineType}</b></div>
                         <div class="flex-item">${violation.status == 0? "Не оплачен": "Оплачен"}</div>
                         <div class="flex-item"> ${violation.carNumber} </div>
                         <c:url var="update" value="/violations/${violation.id}/edit"/>
@@ -76,7 +81,9 @@
                                             </form>
                                         </div>
                                         <div class="flex-item">
-                                            <a href = "#" class="input-button" style="padding-top: -1%">Нет</a>
+                                            <form action="#">
+                                                <input type="submit" value="Нет" class="input-button"/>
+                                            </form>
                                         </div>
                                     </div>
                                 </div>

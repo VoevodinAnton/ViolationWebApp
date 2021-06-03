@@ -55,7 +55,9 @@
                                     </form>
                                 </div>
                                 <div class="flex-item">
-                                    <a href = "#" class="input-button" style="padding-top: -1%">Нет</a>
+                                    <form action="#">
+                                        <input type="submit" value="Нет" class="input-button"/>
+                                    </form>
                                 </div>
                             </div>
                         </div>
