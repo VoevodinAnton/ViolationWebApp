@@ -2,74 +2,27 @@
 <database>
     <cars>
         <car>
-            <idc>6</idc>
-            <number>Р765ОР65</number>
-            <model>Nissan</model>
-            <owner>Алексеев Алексей Алексеевич</owner>
-        </car>
-        <car>
-            <idc>7</idc>
-            <number>Н654ОГ54</number>
-            <model>Opel Astra</model>
-            <owner>Николаев Иван Романович</owner>
-        </car>
-        <car>
-            <idc>8</idc>
-            <number>Y845JY56</number>
-            <model>Opel Astra</model>
-            <owner>Васильев Аркадий Николаевич</owner>
-        </car>
-        <car>
             <idc>4</idc>
-            <number>Н724ОШ153</number>
+            <number>�724��153</number>
             <model>Volkswagen Tiguan</model>
-            <owner>Лойченко Георгий Павлович</owner>
-        </car>
-        <car>
-            <idc>1</idc>
-            <number>Н645НН876</number>
-            <model>Lada Priora</model>
-            <owner>Раздувайко Иван Анатольевич</owner>
+            <owner>�������� ������� ��������</owner>
         </car>
     </cars>
     <violations>
         <violation>
-            <idv>6</idv>
+            <idv>4</idv>
             <id_fine>4</id_fine>
             <id_car>4</id_car>
-            <address>Самара, Братьев Коростелевых, 45</address>
-            <date>2020-09-30</date>
-            <status>0</status>
-        </violation>
-        <violation>
-            <idv>1</idv>
-            <id_fine>1</id_fine>
-            <id_car>1</id_car>
-            <address>Московское шоссе, 34б</address>
-            <date>2021-08-21</date>
-            <status>0</status>
+            <address>������, ���������� �����, 34�</address>
+            <date>2021-02-21</date>
+            <status>1</status>
         </violation>
     </violations>
     <fines>
         <fine>
-            <idf>3</idf>
-            <type>Пересечение сплошной при выполнении маневра, связанного с разворотом или поворотом налево</type>
-            <amount>1500</amount>
-        </fine>
-        <fine>
             <idf>4</idf>
-            <type>Превышение установленной скорости движения ТС на величину более 20, но не более 40 км/ч</type>
+            <type>���������� ������������� �������� �������� �� �� �������� ����� 20, �� �� ����� 40 ��/�</type>
             <amount>500</amount>
-        </fine>
-        <fine>
-            <idf>5</idf>
-            <type>Превышение установленной скорости движения ТС на величину более 40, но не более 60 км/ч</type>
-            <amount>1500</amount>
-        </fine>
-        <fine>
-            <idf>1</idf>
-            <type>Проезд на красный</type>
-            <amount>2000</amount>
         </fine>
     </fines>
 </database>

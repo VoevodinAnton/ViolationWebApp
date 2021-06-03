@@ -76,11 +76,11 @@ public class XmlIO implements XmlExportImport {
         return null;
     }
 
-    @Override
+    /*@Override
     public void exportToFile(String fileName) {
         StaxWriter writer = new StaxWriter(carDAO, violationsDAO, fineDAO);
         writer.staxWriter();
-    }
+    }*/
 
     public File exportToFileViolation(Violation violation) {
         try{
@@ -117,10 +117,10 @@ public class XmlIO implements XmlExportImport {
         violationsDAO.importFromFile(violations);
         try {
             TransformerFactory factory = TransformerFactory.newInstance();
-            Source xslt = new StreamSource(new File("src/main/webapp/res/xml-database/database.xslt"));
+            Source xslt = new StreamSource(new File("D:/ViolationWebApp/src/main/webapp/res/xml-database/database.xslt"));
             Transformer transformer = factory.newTransformer(xslt);
-            Source xml = new StreamSource(new File("src/main/webapp/res/xml-database/database.xml"));
-            transformer.transform(xml, new StreamResult(new File("src/main/webapp/WEB-INF/pages/XML/output.jsp")));
+            Source xml = new StreamSource(new File("D:/ViolationWebApp/src/main/webapp/res/xml-database/database.xml"));
+            transformer.transform(xml, new StreamResult(new File("D:/ViolationWebApp/src/main/webapp/WEB-INF/pages/XML/output.jsp")));
         } catch (TransformerConfigurationException e) {
             e.printStackTrace();
         } catch (TransformerException e) {

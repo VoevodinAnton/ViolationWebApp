@@ -87,9 +87,6 @@ public class CarsController {
     public ModelAndView createViolation(@ModelAttribute("violation") @Valid Violation violation, BindingResult bindingResult, @PathVariable("id") int idCar) {
         ModelAndView modelAndView = new ModelAndView();
         violation.setId_car(idCar);
-
-        //TODO: заглушка, убрать когда будет починен чекбокс
-        //violation.setStatus(1);
         if (bindingResult.hasErrors()) {
             modelAndView.addObject("car", carDAO.get(idCar));
             modelAndView.addObject("fines", fineDAO.getAllFines());

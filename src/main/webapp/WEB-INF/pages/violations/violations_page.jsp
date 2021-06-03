@@ -21,7 +21,8 @@
 </div>
 <div class="flex-container">
     <h2 class="main-title" style="margin-right: 80%">Поиск штрафов</h2>
-    <form action="#" style="margin-top: 1%">
+    <c:url value="/violations/import_from_file" var="importFromFile"/>
+    <form action="${importFromFile}" method="GET" style="margin-top: 1%">
         <input type="submit" value="Импорт из файла" class="input-button"/>
     </form>
 </div>

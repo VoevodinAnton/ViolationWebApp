@@ -17,7 +17,7 @@
                     <xsl:for-each select="cars/car">
                         <xsl:sort/>
                             <tr>
-                                <td><xsl:value-of select="id"/></td>
+                                <td><xsl:value-of select="idc"/></td>
                                 <td><xsl:value-of select="number"/></td>
                                 <td><xsl:value-of select="model"/></td>
                                 <td><xsl:value-of select="owner"/></td>
@@ -34,7 +34,7 @@
                     <xsl:for-each select="fines/fine">
                         <xsl:sort/>
                         <tr>
-                            <td><xsl:value-of select="id"/></td>
+                            <td><xsl:value-of select="idf"/></td>
                             <td><xsl:value-of select="type"/></td>
                             <td><xsl:value-of select="amount"/></td>
                         </tr>
@@ -53,7 +53,7 @@
                     <xsl:for-each select="violations/violation">
                         <xsl:sort/>
                         <tr>
-                            <td><xsl:value-of select="id"/></td>
+                            <td><xsl:value-of select="idv"/></td>
                             <td><xsl:value-of select="id_car"/></td>
                             <td><xsl:value-of select="id_fine"/></td>
                             <td><xsl:value-of select="date"/></td>

@@ -1,4 +1,5 @@
 package com.netcracker.web.violations.model;
+import org.hibernate.validator.constraints.UniqueElements;
 
 import javax.validation.constraints.NotBlank;
 import javax.validation.constraints.NotNull;
@@ -8,10 +9,11 @@ import javax.xml.bind.annotation.XmlAttribute;
 import javax.xml.bind.annotation.XmlElement;
 import javax.xml.bind.annotation.XmlRootElement;
 import javax.xml.bind.annotation.XmlType;
+import java.lang.annotation.Annotation;
 
 @XmlRootElement(name = "car")
 @XmlType(propOrder = {"id", "number", "model", "owner"})
-public class Car {
+public class Car{
     private Integer id;
 
     @NotBlank(message = "Поле не может быть пустым")

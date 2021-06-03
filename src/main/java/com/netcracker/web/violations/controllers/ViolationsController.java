@@ -6,6 +6,8 @@ import com.netcracker.web.violations.dao.ViolationsDAOImpl;
 import com.netcracker.web.violations.model.Car;
 import com.netcracker.web.violations.model.Violation;
 import com.netcracker.web.violations.model.ViolationOutput;
+import com.netcracker.web.violations.services.XmlIO;
+import com.netcracker.web.violations.stax.StaxWriter;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.validation.BindingResult;
@@ -23,13 +25,15 @@ public class ViolationsController {
     private final CarDAOImpl carDAO;
     private final ViolationsDAOImpl violationDAO;
     private final FineDAOImpl fineDAO;
-
+    private final XmlIO xmlIO;
+    private List<Violation> violationsSearch;
 
     @Autowired
     public ViolationsController(CarDAOImpl carDAO, ViolationsDAOImpl violationDAO, FineDAOImpl fineDAO) {
         this.carDAO = carDAO;
         this.violationDAO = violationDAO;
         this.fineDAO = fineDAO;
+        this.xmlIO = new XmlIO(carDAO, fineDAO, violationDAO);
     }
 
 
@@ -104,7 +108,9 @@ public class ViolationsController {
         List<Violation> violationList = violationDAO.searchViolation(requestParams.get("number"),requestParams.get("type"), requestParams.get("status"));
 
         ArrayList<ViolationOutput> violations = new ArrayList<>();
+        violationsSearch = new ArrayList<>();
         for (Violation violation : violationList) {
+            violationsSearch.add(violation);
             ViolationOutput violationAdd = violationDAO.convertToOutput(violation);
             violations.add(violationAdd);
         }
@@ -113,6 +119,22 @@ public class ViolationsController {
 
         modelAndView.setViewName("violations/search_page");
 
+        return modelAndView;
+    }
+    @GetMapping("/import_from_file")
+    public ModelAndView getAllDatabase(){
+        ModelAndView modelAndView = new ModelAndView();
+        xmlIO.importFromFile("D:/ViolationWebApp/src/main/webapp/res/xml-database/database.xml");
+        modelAndView.setViewName("XML/output");
+        return modelAndView;
+    }
+
+    @PostMapping("/search")
+    public ModelAndView exportToFile(){
+        ModelAndView modelAndView = new ModelAndView();
+        StaxWriter staxWriter = new StaxWriter(carDAO, violationDAO, fineDAO);
+        staxWriter.staxWriter(violationsSearch);
+        modelAndView.setViewName("redirect:/violations/search");
         return modelAndView;
     }
 

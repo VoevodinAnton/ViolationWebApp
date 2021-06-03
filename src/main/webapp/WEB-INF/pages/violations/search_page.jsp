@@ -25,8 +25,9 @@
 </div>
 <h2 class="main-title">Результаты поиска</h2>
 <div class="parent">
-    <form action="/cars">
-        <button style="background-color: #19196c;">Экспорт результатов поиска</button>
+    <c:url value="/violations/search" var="var"/>
+    <form action="${var}" method="POST">
+        <button style="background-color: #19196c">Экспорт результатов поиска</button>
     </form>
 </div>
 <div class="parent">

@@ -12,6 +12,7 @@ import javax.xml.stream.XMLStreamException;
 import javax.xml.stream.XMLStreamWriter;
 import java.io.FileWriter;
 import java.io.IOException;
+import java.util.ArrayList;
 import java.util.List;
 
 public class StaxWriter {
@@ -25,14 +26,17 @@ public class StaxWriter {
         this.fineDAO = fineDAO;
     }
 
-    public void staxWriter(){
-        List<Car> cars = carDAO.getAllCars();
-        List<Violation> violations = violationsDAO.getAllViolations();
-        List<Fine> fines = fineDAO.getAllFines();
+    public void staxWriter(List<Violation> violations){
+        List<Car> cars = new ArrayList<>();
+        List<Fine> fines = new ArrayList<>();
+        for(Violation violation:violations){
+            cars.add(carDAO.get(violation.getId_car()));
+            fines.add(fineDAO.get(violation.getId_fine()));
+        }
 
         try{
             XMLOutputFactory outputFactory = XMLOutputFactory.newInstance();
-            XMLStreamWriter writer = outputFactory.createXMLStreamWriter(new FileWriter("src/main/webapp/res/xml-database/database.xml"));
+            XMLStreamWriter writer = outputFactory.createXMLStreamWriter(new FileWriter("D://ViolationWebApp/src/main/webapp/res/xml-database/database.xml"));
 
             writer.writeStartDocument("1.0");
             writer.writeStartElement("database");
@@ -118,8 +122,6 @@ public class StaxWriter {
                 writer.writeEndElement();
             }
             writer.writeEndElement();
-
-
 
             writer.writeEndElement();
             writer.writeEndDocument();
