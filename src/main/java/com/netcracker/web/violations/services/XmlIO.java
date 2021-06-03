@@ -108,7 +108,7 @@ public class XmlIO implements XmlExportImport {
             Source xslt = new StreamSource(new File("src/main/webapp/res/xml-database/database.xslt"));
             Transformer transformer = factory.newTransformer(xslt);
             Source xml = new StreamSource(new File("src/main/webapp/res/xml-database/database.xml"));
-            transformer.transform(xml, new StreamResult(new File("src/main/webapp/res/xml-database/output.html")));
+            transformer.transform(xml, new StreamResult(new File("src/main/webapp/WEB-INF/pages/XML/output.jsp")));
         } catch (TransformerConfigurationException e) {
             e.printStackTrace();
         } catch (TransformerException e) {

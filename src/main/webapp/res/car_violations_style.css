@@ -111,3 +111,13 @@ input{
     color: white;
     font-weight: 700;
 }
+.input-button{
+    padding: 5px;
+    margin: 5px;
+    height: 30px;
+    border-radius: 5px;
+    border: 0px;
+    background-color: #0A0C29;
+    color: white;
+    font-weight: 700;
+}

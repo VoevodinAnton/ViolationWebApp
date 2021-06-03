@@ -53,6 +53,20 @@ public class CarDAOImpl implements CarDAO {
         }
     }
 
+    public boolean checkUnique(Car car){
+        PreparedStatement preparedStatement = null;
+        boolean result = false;
+        try {
+            preparedStatement = connection.prepareStatement("SELECT * FROM Car WHERE number=?");
+            preparedStatement.setString(1, car.getNumber());
+            ResultSet resultSet = preparedStatement.executeQuery();
+            if(!resultSet.next())
+                result = true;
+        } catch (SQLException throwables) {
+            throwables.printStackTrace();
+        }
+        return result;
+    }
     @Override
     public void update(int id, Car car) {
         try {

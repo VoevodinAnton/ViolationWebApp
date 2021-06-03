@@ -187,7 +187,6 @@ public class ViolationsDAOImpl implements ViolationDAO {
         }
         return violation;
     }
-
     @Override
     public void importFromFile(List<Violation> violations) {
         PreparedStatement preparedStatement = null;

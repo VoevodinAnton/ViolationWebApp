@@ -19,10 +19,15 @@
 <div class="cap">
     <h1>Портал учета нарушений ПДД</h1>
 </div>
-<h2 class="main-title">Результаты поиска</h2>
 <div class="back">
     <c:url var="back" value="/violations"/>
     <a href="${back}">Вернуться на страницу поиска</a>
+</div>
+<h2 class="main-title">Результаты поиска</h2>
+<div class="parent">
+    <form action="/cars">
+        <button style="background-color: #19196c;">Экспорт результатов поиска</button>
+    </form>
 </div>
 <div class="parent">
     <form action="/cars">
@@ -35,7 +40,7 @@
             <td>
                 <div class="flex-container-parent">
                     <div class="flex-container">
-                        <div class="flex-item"> ${violation.fineType} </div>
+                        <div class="flex-item" style="width: 250px"><b>${violation.fineType}</b></div>
                         <div class="flex-item">${violation.status == 0? "Не оплачен": "Оплачен"}</div>
                         <div class="flex-item"> ${violation.carNumber} </div>
                         <c:url var="update" value="/violations/${violation.id}/edit"/>
@@ -58,7 +63,9 @@
                                         </form>
                                     </div>
                                     <div class="flex-item">
-                                        <a href = "#" class="input-button" style="padding-top: -1%">Нет</a>
+                                        <form action="#">
+                                            <input type="submit" value="Нет" class="input-button"/>
+                                        </form>
                                     </div>
                                 </div>
                             </div>

@@ -77,8 +77,6 @@ public class ViolationsController {
     @PostMapping("/{id}")
     public ModelAndView update(@ModelAttribute("violation") @Valid Violation violationUpdated, BindingResult bindingResult, @PathVariable("id") int id) {
         ModelAndView modelAndView = new ModelAndView();
-        //TODO: заглушка, убрать когда будет починен чекбокс
-        //violationUpdated.setStatus(1);
         if (bindingResult.hasErrors()){
             modelAndView.addObject("cars", carDAO.allCars());
             modelAndView.addObject("violation", violationDAO.get(id));
