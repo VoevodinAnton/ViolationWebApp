@@ -9,8 +9,13 @@ import com.netcracker.web.violations.model.Violation;
 import com.netcracker.web.violations.model.ViolationOutput;
 import com.netcracker.web.violations.stax.CarStaXParser;
 import com.netcracker.web.violations.stax.FineStaXParser;
+import com.netcracker.web.violations.stax.StaxWriter;
 import com.netcracker.web.violations.stax.ViolationStaXParser;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.context.annotation.Scope;
+import org.springframework.context.annotation.ScopedProxyMode;
+import org.springframework.stereotype.Component;
+import org.springframework.stereotype.Service;
 import org.w3c.dom.Document;
 
 import javax.xml.bind.JAXBContext;
@@ -25,6 +30,8 @@ import java.io.File;
 import java.io.IOException;
 import java.util.List;
 
+@Component
+@Scope(value = "request", proxyMode = ScopedProxyMode.TARGET_CLASS)
 public class XmlIO implements XmlExportImport {
     CarDAOImpl carDAO;
     FineDAOImpl fineDAO;
@@ -70,6 +77,11 @@ public class XmlIO implements XmlExportImport {
     }
 
     @Override
+    public void exportToFile(String fileName) {
+        StaxWriter writer = new StaxWriter(carDAO, violationsDAO, fineDAO);
+        writer.staxWriter();
+    }
+
     public File exportToFileViolation(Violation violation) {
         try{
             Car car = carDAO.get(violation.getId_car());

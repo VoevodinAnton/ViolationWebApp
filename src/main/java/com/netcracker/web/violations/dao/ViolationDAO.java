@@ -20,7 +20,7 @@ public interface ViolationDAO {
 
     void delete(int id);
 
-    List<Violation> allViolations();
+    List<Violation> getAllViolations();
 
     ViolationOutput convertToOutput(Violation violation);
 

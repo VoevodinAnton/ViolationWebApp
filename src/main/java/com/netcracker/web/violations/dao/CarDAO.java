@@ -15,7 +15,7 @@ public interface CarDAO {
 
     void delete(int id);
 
-    List<Car> allCars();
+    List<Car> getAllCars();
 
     void importFromFile(List<Car> cars);
 }

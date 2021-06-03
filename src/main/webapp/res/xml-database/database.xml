@@ -2,40 +2,66 @@
 <database>
     <cars>
         <car>
-            <idc>1</idc>
-            <number>Н645НН876</number>
-            <model>Lada Priora</model>
-            <owner>Раздувайко Иван Анатольевич</owner>
+            <idc>4</idc>
+            <number>В121ВА163</number>
+            <model>mazda 6</model>
+            <owner>Бакал Тимофей Михайлович</owner>
+        </car>
+        <car>
+            <idc>19</idc>
+            <number>В311КЛ161</number>
+            <model>mazda 5</model>
+            <owner>Улитина Валентина Александровна</owner>
+        </car>
+        <car>
+            <idc>12</idc>
+            <number>Ф335ИА163</number>
+            <model>volvo s90</model>
+            <owner>Кашапов Артем Ильясович</owner>
+        </car>
+        <car>
+            <idc>20</idc>
+            <number>В111ВВ163</number>
+            <model>mercedes benz S class</model>
+            <owner>Семенова Виктория Николаевна</owner>
         </car>
     </cars>
-    <fines>
-        <fine>
-            <idf>1</idf>
-            <type>Проезд на красный</type>
-            <amount>2000</amount>
-        </fine>
-        <fine>
-            <idf>2</idf>
-            <type>Проезд на красный</type>
-            <amount>1500</amount>
-        </fine>
-    </fines>
     <violations>
         <violation>
-            <idv>1</idv>
+            <idv>12</idv>
             <id_fine>1</id_fine>
-            <id_car>1</id_car>
-            <address>Московское шоссе, 34б</address>
-            <date>2021-08-21</date>
+            <id_car>12</id_car>
+            <address>Самарская область, г. Самара, ул. Ташкентская, 192</address>
+            <date>2020-01-02</date>
             <status>0</status>
         </violation>
         <violation>
-            <idv>2</idv>
+            <idv>14</idv>
             <id_fine>2</id_fine>
-            <id_car>1</id_car>
-            <address>Ташкентская, 65</address>
-            <date>2021-02-21</date>
-            <status>1</status>
+            <id_car>12</id_car>
+            <address>г. Самара, ул.Ташкентская, 192, 4</address>
+            <date>2021-01-02</date>
+            <status>0</status>
+        </violation>
+        <violation>
+            <idv>15</idv>
+            <id_fine>1</id_fine>
+            <id_car>20</id_car>
+            <address>Московское шоссе, д34</address>
+            <date>2020-06-01</date>
+            <status>0</status>
         </violation>
     </violations>
+    <fines>
+        <fine>
+            <idf>1</idf>
+            <type>Наезд на пешехода</type>
+            <amount>1000</amount>
+        </fine>
+        <fine>
+            <idf>2</idf>
+            <type>Проезд на красный свет</type>
+            <amount>1500</amount>
+        </fine>
+    </fines>
 </database>

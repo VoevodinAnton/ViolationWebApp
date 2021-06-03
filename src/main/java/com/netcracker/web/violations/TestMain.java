@@ -3,21 +3,8 @@ package com.netcracker.web.violations;
 import com.netcracker.web.violations.dao.CarDAOImpl;
 import com.netcracker.web.violations.dao.FineDAOImpl;
 import com.netcracker.web.violations.dao.ViolationsDAOImpl;
-import com.netcracker.web.violations.model.Car;
-import com.netcracker.web.violations.model.Fine;
-import com.netcracker.web.violations.model.Violation;
 import com.netcracker.web.violations.services.XmlIO;
-import com.netcracker.web.violations.stax.CarStaXParser;
-import com.netcracker.web.violations.stax.FineStaXParser;
 import com.netcracker.web.violations.stax.StaxWriter;
-import com.netcracker.web.violations.stax.ViolationStaXParser;
-
-import javax.xml.parsers.DocumentBuilder;
-import javax.xml.transform.*;
-import javax.xml.transform.stream.StreamResult;
-import javax.xml.transform.stream.StreamSource;
-import java.io.File;
-import java.util.List;
 
 //только для проверки парсера, нужно будет удалить потом
 public class TestMain {
@@ -69,10 +56,15 @@ public class TestMain {
         CarDAOImpl carDAO = new CarDAOImpl();
         FineDAOImpl fineDAO = new FineDAOImpl();
         ViolationsDAOImpl violationsDAO = new ViolationsDAOImpl();
-        /*StaxWriter staxWriter = new StaxWriter(carDAO, violationsDAO, fineDAO);
-        staxWriter.staxWriter();*/
+        /*
+        StaxWriter staxWriter = new StaxWriter(carDAO, violationsDAO, fineDAO);
+        staxWriter.staxWriter();
+
+         */
+
 
         XmlIO xmlIO = new XmlIO(carDAO, fineDAO, violationsDAO);
         xmlIO.importFromFile("src/main/webapp/res/xml-database/database.xml");
+
     }
 }

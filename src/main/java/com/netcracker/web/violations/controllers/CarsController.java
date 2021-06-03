@@ -35,7 +35,7 @@ public class CarsController {
     public ModelAndView allCars() {
         ModelAndView modelAndView = new ModelAndView();
         modelAndView.setViewName("cars/cars_page");
-        modelAndView.addObject("cars", carDAO.allCars());
+        modelAndView.addObject("cars", carDAO.getAllCars());
         return modelAndView;
     }
 
@@ -79,7 +79,7 @@ public class CarsController {
         ModelAndView modelAndView = new ModelAndView();
         modelAndView.setViewName("violations/new");
         modelAndView.addObject("car", carDAO.get(idCar));
-        modelAndView.addObject("fines", fineDAO.allFines());
+        modelAndView.addObject("fines", fineDAO.getAllFines());
         return modelAndView;
     }
 
@@ -92,7 +92,7 @@ public class CarsController {
         //violation.setStatus(1);
         if (bindingResult.hasErrors()) {
             modelAndView.addObject("car", carDAO.get(idCar));
-            modelAndView.addObject("fines", fineDAO.allFines());
+            modelAndView.addObject("fines", fineDAO.getAllFines());
             modelAndView.setViewName("violations/new");
             return modelAndView;
         }
@@ -107,7 +107,7 @@ public class CarsController {
         modelAndView.setViewName("cars/editViolation");
         modelAndView.addObject("violation", violationsDAO.get(idViolation));
         modelAndView.addObject("car", carDAO.get(id));
-        modelAndView.addObject("fines", fineDAO.allFines());
+        modelAndView.addObject("fines", fineDAO.getAllFines());
         return modelAndView;
     }
 
@@ -118,7 +118,7 @@ public class CarsController {
         if (bindingResult.hasErrors()) {
             modelAndView.addObject("violation", violationsDAO.get(idViolation));
             modelAndView.addObject("car", carDAO.get(idCar));
-            modelAndView.addObject("fines", fineDAO.allFines());
+            modelAndView.addObject("fines", fineDAO.getAllFines());
             modelAndView.setViewName("cars/editViolation");
             return modelAndView;
         }

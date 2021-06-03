@@ -3,6 +3,7 @@ package com.netcracker.web.violations.dao;
 import com.netcracker.web.violations.model.Car;
 import com.netcracker.web.violations.model.Violation;
 import com.netcracker.web.violations.model.ViolationOutput;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.jdbc.core.JdbcTemplate;
 import org.springframework.stereotype.Component;
 
@@ -15,10 +16,13 @@ import java.util.List;
 @Component
 public class CarDAOImpl implements CarDAO {
 
-    private static String url = "jdbc:postgresql://localhost:5432/Violations";
+    private static String url = "jdbc:postgresql://localhost:5432/violations";
     private static String username = "postgres";
-    private static String password = "Vegetable*1";
+    private static String password = "avoeva";
     private static Connection connection;
+
+    @Autowired
+    DataSource dataSource;
 
     {
         System.out.println("Connecting...");
@@ -41,6 +45,7 @@ public class CarDAOImpl implements CarDAO {
     @Override
     public void save(Car car) {
         try {
+            dataSource.getConnection();
             PreparedStatement preparedStatement =  connection.prepareStatement("INSERT INTO Car (number, model, owner) VALUES(?,?,?)");
 
             preparedStatement.setString(1, car.getNumber());
@@ -105,7 +110,7 @@ public class CarDAOImpl implements CarDAO {
     }
 
     @Override
-    public List<Car> allCars() { //переименовать метод
+    public List<Car> getAllCars() { //переименовать метод
         List<Car> cars = new ArrayList<>();
         try {
             Statement statement = connection.createStatement();

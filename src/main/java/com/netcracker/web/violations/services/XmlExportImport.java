@@ -10,6 +10,6 @@ import java.io.File;
 public interface XmlExportImport {
     File exportToFileCar(Car car);
     File exportToFileFine(Fine fine);
-    File exportToFileViolation(Violation violation);
+    void exportToFile(String fileName);
     void importFromFile(String fileName);
 }

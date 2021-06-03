@@ -11,9 +11,9 @@ import java.util.List;
 @Component
 public class FineDAOImpl implements FineDAO {
 
-    private static String url = "jdbc:postgresql://localhost:5432/Violations";
+    private static String url = "jdbc:postgresql://localhost:5432/violations";
     private static String username = "postgres";
-    private static String password = "Vegetable*1";
+    private static String password = "avoeva";
     private static Connection connection;
 
     {
@@ -83,7 +83,7 @@ public class FineDAOImpl implements FineDAO {
     }
 
     @Override
-    public List<Fine> allFines() {
+    public List<Fine> getAllFines() {
         List<Fine> fines = new ArrayList<>();
         try {
             Statement statement = connection.createStatement();

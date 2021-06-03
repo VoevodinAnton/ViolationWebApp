@@ -26,9 +26,9 @@ public class StaxWriter {
     }
 
     public void staxWriter(){
-        List<Car> cars = carDAO.allCars();
-        List<Violation> violations = violationsDAO.allViolations();
-        List<Fine> fines = fineDAO.allFines();
+        List<Car> cars = carDAO.getAllCars();
+        List<Violation> violations = violationsDAO.getAllViolations();
+        List<Fine> fines = fineDAO.getAllFines();
 
         try{
             XMLOutputFactory outputFactory = XMLOutputFactory.newInstance();

@@ -13,7 +13,7 @@ public interface FineDAO {
 
     void delete(int id);
 
-    List<Fine> allFines();
+    List<Fine> getAllFines();
 
     void importFromFile(List<Fine> fines);
 }

@@ -38,13 +38,13 @@ public class ViolationsController {
         ModelAndView modelAndView = new ModelAndView();
         modelAndView.setViewName("violations/violations_page");
         ArrayList<ViolationOutput> violations = new ArrayList<>();
-        for (Violation violation : violationDAO.allViolations()) {
+        for (Violation violation : violationDAO.getAllViolations()) {
             ViolationOutput violationAdd = violationDAO.convertToOutput(violation);
             violations.add(violationAdd);
         }
         modelAndView.addObject("violations", violations);
-        modelAndView.addObject("cars", carDAO.allCars());
-        modelAndView.addObject("fines", fineDAO.allFines());
+        modelAndView.addObject("cars", carDAO.getAllCars());
+        modelAndView.addObject("fines", fineDAO.getAllFines());
         String[] searchParameters = new String[4];
         modelAndView.addObject("searchParameters", searchParameters);
         return modelAndView;
@@ -68,9 +68,9 @@ public class ViolationsController {
     public ModelAndView edit(@PathVariable("id") int id) {
         ModelAndView modelAndView = new ModelAndView();
         modelAndView.setViewName("violations/edit");
-        modelAndView.addObject("cars", carDAO.allCars());
+        modelAndView.addObject("cars", carDAO.getAllCars());
         modelAndView.addObject("violation", violationDAO.get(id));
-        modelAndView.addObject("fines", fineDAO.allFines());
+        modelAndView.addObject("fines", fineDAO.getAllFines());
         return modelAndView;
     }
 
@@ -80,9 +80,9 @@ public class ViolationsController {
         //TODO: заглушка, убрать когда будет починен чекбокс
         //violationUpdated.setStatus(1);
         if (bindingResult.hasErrors()){
-            modelAndView.addObject("cars", carDAO.allCars());
+            modelAndView.addObject("cars", carDAO.getAllCars());
             modelAndView.addObject("violation", violationDAO.get(id));
-            modelAndView.addObject("fines", fineDAO.allFines());
+            modelAndView.addObject("fines", fineDAO.getAllFines());
             modelAndView.setViewName("violations/edit");
             return modelAndView;
         }
