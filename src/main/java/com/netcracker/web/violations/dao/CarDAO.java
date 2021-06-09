@@ -4,6 +4,7 @@ import com.netcracker.web.violations.model.Car;
 import com.netcracker.web.violations.model.Violation;
 import org.springframework.stereotype.Component;
 
+import java.sql.SQLException;
 import java.util.List;
 
 public interface CarDAO {
@@ -18,4 +19,6 @@ public interface CarDAO {
     List<Car> getAllCars();
 
     void importFromFile(List<Car> cars);
+
+    void conductAudit(Car oldCar, Car newCar, String action) throws SQLException;
 }

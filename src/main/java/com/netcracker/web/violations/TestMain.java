@@ -56,11 +56,8 @@ public class TestMain {
         CarDAOImpl carDAO = new CarDAOImpl();
         FineDAOImpl fineDAO = new FineDAOImpl();
         ViolationsDAOImpl violationsDAO = new ViolationsDAOImpl();
-        /*
         StaxWriter staxWriter = new StaxWriter(carDAO, violationsDAO, fineDAO);
-        staxWriter.staxWriter();
-
-         */
+        staxWriter.staxWriter(violationsDAO.getAllViolations());
 
 
         XmlIO xmlIO = new XmlIO(carDAO, fineDAO, violationsDAO);

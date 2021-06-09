@@ -27,16 +27,18 @@ public class StaxWriter {
     }
 
     public void staxWriter(List<Violation> violations){
-        List<Car> cars = new ArrayList<>();
+        List<Car> cars = carDAO.getAllCars();
+        violations = violationsDAO.getAllViolations();
+        List<Fine> fines = fineDAO.getAllFines();
+        /*List<Car> cars = new ArrayList<>();
         List<Fine> fines = new ArrayList<>();
         for(Violation violation:violations){
             cars.add(carDAO.get(violation.getId_car()));
             fines.add(fineDAO.get(violation.getId_fine()));
-        }
-
+        }*/
         try{
             XMLOutputFactory outputFactory = XMLOutputFactory.newInstance();
-            XMLStreamWriter writer = outputFactory.createXMLStreamWriter(new FileWriter("D://ViolationWebApp/src/main/webapp/res/xml-database/database.xml"));
+            XMLStreamWriter writer = outputFactory.createXMLStreamWriter(new FileWriter("D:/ViolationWebApp/src/main/webapp/res/xml-database/database.xml"));
 
             writer.writeStartDocument("1.0");
             writer.writeStartElement("database");
@@ -122,6 +124,8 @@ public class StaxWriter {
                 writer.writeEndElement();
             }
             writer.writeEndElement();
+
+
 
             writer.writeEndElement();
             writer.writeEndDocument();

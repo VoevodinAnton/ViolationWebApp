@@ -7,10 +7,22 @@
             <model>Volkswagen Tiguan</model>
             <owner>�������� ������� ��������</owner>
         </car>
+        <car>
+            <idc>1</idc>
+            <number>�645��876</number>
+            <model>Lada Priora</model>
+            <owner>���������� ���� �����������</owner>
+        </car>
+        <car>
+            <idc>9</idc>
+            <number>�654��154</number>
+            <model>Nissan Almera</model>
+            <owner>������� �������� ����������</owner>
+        </car>
     </cars>
     <violations>
         <violation>
-            <idv>4</idv>
+            <idv>10</idv>
             <id_fine>4</id_fine>
             <id_car>4</id_car>
             <address>������, ���������� �����, 34�</address>
@@ -20,9 +32,19 @@
     </violations>
     <fines>
         <fine>
+            <idf>3</idf>
+            <type>����������� �������� ��� ���������� �������, ���������� � ���������� ��� ��������� ������</type>
+            <amount>1500</amount>
+        </fine>
+        <fine>
             <idf>4</idf>
             <type>���������� ������������� �������� �������� �� �� �������� ����� 20, �� �� ����� 40 ��/�</type>
             <amount>500</amount>
+        </fine>
+        <fine>
+            <idf>1</idf>
+            <type>������ �� �������</type>
+            <amount>2000</amount>
         </fine>
     </fines>
 </database>

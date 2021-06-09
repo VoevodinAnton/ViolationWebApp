@@ -9,8 +9,10 @@ import org.springframework.stereotype.Component;
 import javax.sql.DataSource;
 import javax.swing.*;
 import java.sql.*;
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Date;
 
 @Component
 public class CarDAOImpl implements CarDAO {
@@ -48,6 +50,18 @@ public class CarDAOImpl implements CarDAO {
             preparedStatement.setString(3, car.getOwner());
 
             preparedStatement.executeUpdate();
+
+            preparedStatement =  connection.prepareStatement("SELECT * FROM Car WHERE number=? AND model=? AND owner=?");
+
+            preparedStatement.setString(1, car.getNumber());
+            preparedStatement.setString(2, car.getModel());
+            preparedStatement.setString(3, car.getOwner());
+
+            ResultSet resultSet = preparedStatement.executeQuery();
+            resultSet.next();
+            Car car1 = createCar(resultSet);
+
+            conductAudit(new Car(), car1, "Добавлен");
         } catch (SQLException e) {
             e.printStackTrace();
         }
@@ -70,6 +84,7 @@ public class CarDAOImpl implements CarDAO {
     @Override
     public void update(int id, Car car) {
         try {
+            Car oldCar = get(id);
             PreparedStatement preparedStatement =
                     connection.prepareStatement("UPDATE Car SET number =?, model=?, owner=? WHERE id=?");
 
@@ -79,6 +94,8 @@ public class CarDAOImpl implements CarDAO {
             preparedStatement.setInt(4, id);
 
             preparedStatement.executeUpdate();
+            conductAudit(oldCar, car, "Изменен");
+
         } catch (SQLException e) {
             e.printStackTrace();
         }
@@ -107,11 +124,12 @@ public class CarDAOImpl implements CarDAO {
         PreparedStatement preparedStatement =
                 null;
         try {
+            Car car = get(id);
             preparedStatement = connection.prepareStatement("DELETE FROM Car WHERE id=?");
-
             preparedStatement.setInt(1, id);
-
             preparedStatement.executeUpdate();
+
+            //conductAudit(car, new Car(), "Удален");
         } catch (SQLException e) {
             e.printStackTrace();
         }
@@ -119,7 +137,7 @@ public class CarDAOImpl implements CarDAO {
     }
 
     @Override
-    public List<Car> getAllCars() { //переименовать метод
+    public List<Car> getAllCars() {
         List<Car> cars = new ArrayList<>();
         try {
             Statement statement = connection.createStatement();
@@ -178,6 +196,26 @@ public class CarDAOImpl implements CarDAO {
         } catch (SQLException e) {
             e.printStackTrace();
         }
+    }
+
+    @Override
+    public void conductAudit(Car oldCar, Car newCar, String action) throws SQLException {
+        PreparedStatement preparedStatement = connection.prepareStatement("INSERT INTO CarAudit(id_car, old_number, new_number, old_model," +
+                " new_model, old_owner, new_owner, type_of_edit, date_edit)" +
+                " VALUES(?,?,?,?,?,?,?,?,?)");
+        preparedStatement.setInt(1, newCar.getId());
+        preparedStatement.setString(2, action.equals("Добавлен")? "": oldCar.getNumber());
+        preparedStatement.setString(3, action.equals("Удален")?"":newCar.getNumber());
+        preparedStatement.setString(4, action.equals("Добавлен")? "":oldCar.getModel());
+        preparedStatement.setString(5, action.equals("Удален")?"":newCar.getModel());
+        preparedStatement.setString(6, action.equals("Добавлен")? "":oldCar.getOwner());
+        preparedStatement.setString(7, action.equals("Удален")?"":newCar.getOwner());
+        preparedStatement.setString(8, action);
+        Date date = new Date();
+        SimpleDateFormat dateFormat = new SimpleDateFormat("yyyy-MM-dd hh:mm:ss");
+        preparedStatement.setString(9, dateFormat.format(date));
+
+        preparedStatement.executeUpdate();
     }
 
 }
