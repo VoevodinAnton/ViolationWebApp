@@ -1,6 +1,7 @@
 package com.netcracker.web.violations.dao;
 
 import com.netcracker.web.violations.model.Car;
+import com.netcracker.web.violations.model.CarAudit;
 import com.netcracker.web.violations.model.Violation;
 import org.springframework.stereotype.Component;
 
@@ -21,4 +22,7 @@ public interface CarDAO {
     void importFromFile(List<Car> cars);
 
     void conductAudit(Car oldCar, Car newCar, String action) throws SQLException;
+
+    List<CarAudit> getAudit(int id);
+
 }

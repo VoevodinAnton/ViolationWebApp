@@ -30,6 +30,11 @@ body{
     left: 0;
     display: none;
 }
+.foreachItem{
+    border: 1px solid #0A0C29;
+    border-radius: 10px;
+    padding: 1%;
+}
 .cap{
     padding:1% 1% 1% 5%;
     color:white;

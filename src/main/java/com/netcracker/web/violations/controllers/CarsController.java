@@ -161,4 +161,13 @@ public class CarsController {
         modelAndView.setViewName("redirect:/cars");
         return modelAndView;
     }
+
+    @GetMapping("/{id}/audit")
+    public ModelAndView audit(@PathVariable("id") int id) {
+        ModelAndView modelAndView = new ModelAndView();
+        modelAndView.setViewName("cars/audit");
+        modelAndView.addObject("auditList", carDAO.getAudit(id));
+        modelAndView.addObject("car", carDAO.get(id));
+        return modelAndView;
+    }
 }

@@ -1,6 +1,7 @@
 package com.netcracker.web.violations.dao;
 
 import com.netcracker.web.violations.model.Car;
+import com.netcracker.web.violations.model.CarAudit;
 import com.netcracker.web.violations.model.Violation;
 import com.netcracker.web.violations.model.ViolationOutput;
 import org.springframework.jdbc.core.JdbcTemplate;
@@ -17,9 +18,9 @@ import java.util.Date;
 @Component
 public class CarDAOImpl implements CarDAO {
 
-    private static String url = "jdbc:postgresql://localhost:5432/violations";
+    private static String url = "jdbc:postgresql://localhost:5432/Violations";
     private static String username = "postgres";
-    private static String password = "avoeva";
+    private static String password = "Vegetable*1";
     private static Connection connection;
 
     {
@@ -216,6 +217,33 @@ public class CarDAOImpl implements CarDAO {
         preparedStatement.setString(9, dateFormat.format(date));
 
         preparedStatement.executeUpdate();
+    }
+
+    @Override
+    public List<CarAudit> getAudit(int id) {
+        List<CarAudit> auditTable = new ArrayList<>();
+        try{
+            PreparedStatement preparedStatement = connection.prepareStatement("SELECT * FROM CarAudit WHERE id_car=?");
+            preparedStatement.setInt(1, id);
+            ResultSet resultSet = preparedStatement.executeQuery();
+            while(resultSet.next()){
+                CarAudit auditRow = new CarAudit();
+                auditRow.setId(resultSet.getInt("id"));
+                auditRow.setId_car(resultSet.getInt("id_car"));
+                auditRow.setOldNumber(resultSet.getString("old_number"));
+                auditRow.setNewNumber(resultSet.getString("new_number"));
+                auditRow.setOldModel(resultSet.getString("old_model"));
+                auditRow.setNewModel(resultSet.getString("new_model"));
+                auditRow.setOldOwner(resultSet.getString("old_owner"));
+                auditRow.setNewOwner(resultSet.getString("new_owner"));
+                auditRow.setTypeOfEdit(resultSet.getString("type_of_edit"));
+                auditRow.setDateEdit(resultSet.getString("date_edit"));
+                auditTable.add(auditRow);
+            }
+        } catch (SQLException throwables) {
+            throwables.printStackTrace();
+        }
+        return auditTable;
     }
 
 }

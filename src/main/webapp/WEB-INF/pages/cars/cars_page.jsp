@@ -32,9 +32,13 @@
                 <div class="flex-container">
                     <div class="flex-item">${car.number}</div>
                     <div class="flex-item">${car.model}</div>
+                    <c:url var="carAudit" value="/cars/${car.id}/audit"/>
+                    <form action="${carAudit}">
+                        <input type="submit" value="История изменений" class="input-button"/>
+                    </form>
                     <c:url var="carViolations" value="/cars/${car.id}/violations"/>
                     <form action="${carViolations}">
-                        <input type="submit" value="Посмотреть штрафы на этот автомобиль" class="input-button"/>
+                        <input type="submit" value="Штрафы на этот автомобиль" class="input-button"/>
                     </form>
                     <c:url var="update" value="/cars/${car.id}/edit"/>
                     <form action="${update}">

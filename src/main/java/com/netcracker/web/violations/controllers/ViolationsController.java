@@ -124,7 +124,7 @@ public class ViolationsController {
     @GetMapping("/import_from_file")
     public ModelAndView getAllDatabase(){
         ModelAndView modelAndView = new ModelAndView();
-        xmlIO.importFromFile("C:\\Users\\Антон\\IdeaProjects\\ViolationsWebApp\\src\\main\\webapp\\res\\xml-database\\database.xml");
+        xmlIO.importFromFile("D:/ViolationWebApp/src/main/webapp/res/xml-database/database.xml");
         modelAndView.setViewName("XML/output");
         return modelAndView;
     }

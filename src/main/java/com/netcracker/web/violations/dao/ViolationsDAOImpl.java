@@ -13,9 +13,9 @@ import java.util.List;
 @Component
 public class ViolationsDAOImpl implements ViolationDAO {
 
-    private static String url = "jdbc:postgresql://localhost:5432/violations";
+    private static String url = "jdbc:postgresql://localhost:5432/Violations";
     private static String username = "postgres";
-    private static String password = "avoeva";
+    private static String password = "Vegetable*1";
     private static Connection connection;
 
      {

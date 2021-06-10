@@ -39,7 +39,7 @@ public class StaxWriter {
         }*/
         try{
             XMLOutputFactory outputFactory = XMLOutputFactory.newInstance();
-            XMLStreamWriter writer = outputFactory.createXMLStreamWriter(new FileOutputStream("C:\\Users\\Антон\\IdeaProjects\\ViolationsWebApp\\src\\main\\webapp\\res\\xml-database\\database.xml"), "UTF-8");
+            XMLStreamWriter writer = outputFactory.createXMLStreamWriter(new FileOutputStream("D:/ViolationWebApp/src/main/webapp/res/xml-database/database.xml"), "UTF-8");
 
             writer.writeStartDocument("UTF-8", "1.0");
             writer.writeStartElement("database");
