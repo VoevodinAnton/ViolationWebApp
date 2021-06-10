@@ -27,7 +27,7 @@ public class FineStaXParser {
         try{
             XMLInputFactory inputFactory = XMLInputFactory.newInstance();
             InputStream inputStream = new FileInputStream(fileName);
-            XMLEventReader eventReader = inputFactory.createXMLEventReader(inputStream);
+            XMLEventReader eventReader = inputFactory.createXMLEventReader(inputStream, "UTF-8");
 
             Fine fine = null;
             while(eventReader.hasNext()) {

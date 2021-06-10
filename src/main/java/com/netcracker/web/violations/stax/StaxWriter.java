@@ -10,6 +10,7 @@ import com.netcracker.web.violations.model.Violation;
 import javax.xml.stream.XMLOutputFactory;
 import javax.xml.stream.XMLStreamException;
 import javax.xml.stream.XMLStreamWriter;
+import java.io.FileOutputStream;
 import java.io.FileWriter;
 import java.io.IOException;
 import java.util.ArrayList;
@@ -38,9 +39,9 @@ public class StaxWriter {
         }*/
         try{
             XMLOutputFactory outputFactory = XMLOutputFactory.newInstance();
-            XMLStreamWriter writer = outputFactory.createXMLStreamWriter(new FileWriter("D:/ViolationWebApp/src/main/webapp/res/xml-database/database.xml"));
+            XMLStreamWriter writer = outputFactory.createXMLStreamWriter(new FileOutputStream("C:\\Users\\Антон\\IdeaProjects\\ViolationsWebApp\\src\\main\\webapp\\res\\xml-database\\database.xml"), "UTF-8");
 
-            writer.writeStartDocument("1.0");
+            writer.writeStartDocument("UTF-8", "1.0");
             writer.writeStartElement("database");
 
             writer.writeStartElement("cars");

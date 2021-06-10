@@ -117,10 +117,10 @@ public class XmlIO implements XmlExportImport {
         violationsDAO.importFromFile(violations);
         try {
             TransformerFactory factory = TransformerFactory.newInstance();
-            Source xslt = new StreamSource(new File("D:/ViolationWebApp/src/main/webapp/res/xml-database/database.xslt"));
+            Source xslt = new StreamSource(new File("C:\\Users\\Антон\\IdeaProjects\\ViolationsWebApp\\src\\main\\webapp\\res\\xml-database\\database.xslt"));
             Transformer transformer = factory.newTransformer(xslt);
-            Source xml = new StreamSource(new File("D:/ViolationWebApp/src/main/webapp/res/xml-database/database.xml"));
-            transformer.transform(xml, new StreamResult(new File("D:/ViolationWebApp/src/main/webapp/WEB-INF/pages/XML/output.jsp")));
+            Source xml = new StreamSource(new File("C:\\Users\\Антон\\IdeaProjects\\ViolationsWebApp\\src\\main\\webapp\\res\\xml-database\\database.xml"));
+            transformer.transform(xml, new StreamResult(new File("C:\\Users\\Антон\\IdeaProjects\\ViolationsWebApp\\src\\main\\webapp\\WEB-INF\\pages\\XML\\output.html")));
         } catch (TransformerConfigurationException e) {
             e.printStackTrace();
         } catch (TransformerException e) {

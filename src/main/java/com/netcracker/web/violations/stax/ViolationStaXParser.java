@@ -13,6 +13,7 @@ import javax.xml.stream.events.XMLEvent;
 import java.io.FileInputStream;
 import java.io.FileNotFoundException;
 import java.io.InputStream;
+import java.nio.charset.Charset;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -31,7 +32,7 @@ public class ViolationStaXParser {
         try{
             XMLInputFactory inputFactory = XMLInputFactory.newInstance();
             InputStream inputStream = new FileInputStream(fileName);
-            XMLEventReader eventReader = inputFactory.createXMLEventReader(inputStream);
+            XMLEventReader eventReader = inputFactory.createXMLEventReader(inputStream, "UTF-8");
 
             Violation violation = null;
             while(eventReader.hasNext()) {

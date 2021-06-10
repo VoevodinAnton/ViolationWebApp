@@ -5,10 +5,13 @@ import com.netcracker.web.violations.dao.FineDAOImpl;
 import com.netcracker.web.violations.dao.ViolationsDAOImpl;
 import com.netcracker.web.violations.services.XmlIO;
 import com.netcracker.web.violations.stax.StaxWriter;
+import com.netcracker.web.violations.utils.DBUtil;
+
+import java.sql.SQLException;
 
 //только для проверки парсера, нужно будет удалить потом
 public class TestMain {
-    public static void main(String[] args) {
+    public static void main(String[] args) throws SQLException {
         /*CarStaXParser read = new CarStaXParser();
         List<Car> cars = read.readXMLFile("D://ViolationWebApp//src//main//webapp//res//xml-database//database.xml");
         for(Car car: cars){
@@ -62,6 +65,7 @@ public class TestMain {
 
         XmlIO xmlIO = new XmlIO(carDAO, fineDAO, violationsDAO);
         xmlIO.importFromFile("src/main/webapp/res/xml-database/database.xml");
+
 
     }
 }
